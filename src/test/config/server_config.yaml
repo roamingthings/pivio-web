@@ -6,9 +6,9 @@ pages:
   - description: Search
     url: http://localhost:8080/app/search
     id: tabSearch
-  - description: Service Graph
-    url: http://localhost:8080/app/graph
-    id: tabGraph
+#  - description: Service Graph
+#    url: http://localhost:8080/app/graph
+#    id: tabGraph
   - description: Feed
     url: http://localhost:8080/app/feed
     id: tabFeed

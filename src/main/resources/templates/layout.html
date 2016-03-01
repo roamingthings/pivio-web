@@ -4,15 +4,26 @@
     <title>Pivio View</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/webjars/Semantic-UI/2.1.8/semantic.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/pivio.css"/>
     <script src="/webjars/jquery/2.2.1/jquery.min.js"></script>
     <script src="/webjars/Semantic-UI/2.1.8/semantic.min.js"></script>
+    <script src="/js/activemenu.js"></script>
+    <script th:include="this :: script"></script>
 </head>
 <body>
 
 <div class="ui container">
-    <div class="ui pointing menu">
+    <div id="main_menu" class="ui pointing menu">
         <a class="item" th:each="page: ${config.pages}" th:id="${page.id}" th:href="${page.url}"
            th:text="${page.description}">&nbsp;</a>
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            var pageId = /*[[${pageId}]]*/ '';
+            /*]]>*/
+            $("#"+pageId).addClass("active");
+        </script>
+
 
         <div class="right menu">
             <div class="item">

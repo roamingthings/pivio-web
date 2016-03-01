@@ -30,6 +30,8 @@ public class FeedController {
         List response = restTemplate.getForObject(serverConfig.apiAddress + "/changeset", List.class);
         model.addAttribute("changeset", response);
         model.addAttribute("config", serverConfig);
+        model.addAttribute("pageId", "tabFeed");
+
 
         List changes = new ArrayList();
 

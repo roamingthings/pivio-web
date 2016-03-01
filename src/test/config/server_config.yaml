@@ -16,3 +16,6 @@ pages:
     path: /feed
     url: http://localhost:8080/app/feed
     id: tabFeed
+  - description: Extern
+    url: http://localhost:2015/
+    id: tabExtern

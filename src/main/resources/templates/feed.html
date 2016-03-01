@@ -8,8 +8,29 @@
 <body>
 <div th:fragment="content">
 
-    Feed
 
+    <table class="ui definition table">
+        <tbody>
+        <!--@thymesVar id="change" type="io.pivio.view.feed.FeedEntry"-->
+        <!--@thymesVar id="changeset" type="java.util.List"-->
+        <tr th:each="change: ${changeset}" class="ui top aligned">
+            <td th:text="${change.id}">&nbsp;</td>
+            <td th:text="${change.timestamp}">&nbsp;</td>
+            <td>
+
+                <table class="ui table">
+                    <tbody>
+                    <tr th:each="field: ${change.fields}">
+                        <td th:text="${field.field}" data="field"></td>
+                        <td th:text="${field.previous}" data="prev"></td>
+                        <td th:text="${field.current}" data="current"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 </body>

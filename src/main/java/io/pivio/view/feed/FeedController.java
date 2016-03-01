@@ -27,7 +27,6 @@ public class FeedController {
         model.addAttribute("config", serverConfig);
         model.addAttribute("pageId", "tabFeed");
 
-
         List changes = new ArrayList();
 
         model.addAttribute("changeset", changes);

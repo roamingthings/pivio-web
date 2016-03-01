@@ -3,9 +3,9 @@ pages:
   - description: Overview
     url: http://localhost:8080/app/overview
     id: tabOverview
-  - description: Search
-    url: http://localhost:8080/app/search
-    id: tabSearch
+  - description: Query
+    url: http://localhost:8080/app/query
+    id: tabQuery
 #  - description: Service Graph
 #    url: http://localhost:8080/app/graph
 #    id: tabGraph

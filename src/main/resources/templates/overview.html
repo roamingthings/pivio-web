@@ -8,8 +8,53 @@
 <body>
 <div th:fragment="content">
 
-    Overview
+    <script id="card" type="text/x-handlebars-template">
+        {{#each this}}
+        <a class="ui blue card" data-meta="{{meta}}" href="/detail/index.html?id={{id}}">
+            <div class="content">
+                {{#if servicename}}
+                <div class="right floated mini ui crtx-service">{{servicename}}</div>
+                {{/if}}
+                <div class="header">
+                    {{name}}
+                </div>
+                <div class="meta">
+                    {{team}}
+                </div>
+                <div class="description">
+                    {{description}}
+                </div>
+            </div>
 
+            <div class="extra content">
+            <span class="right floated">
+                {{#if bounded_context}}
+             <i class="circle thin icon "></i>{{bounded_context}}
+                {{/if}}
+             {{context}}
+            </span>
+                {{#if lastchange}}
+            <span>
+                <i class="calendar outline icon"></i>
+                Yesterday 2:14pm
+            </span>
+                {{/if}}
+            </div>
+        </a>
+        {{/each}}
+    </script>
+
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var apiserver = /*[[${config.apiAddress}]]*/ '';
+        /*]]>*/
+    </script>
+    <script src="/js/overview.js"></script>
+
+    <div id="cards" class="ui cards container">
+
+    </div>
 
 </div>
 </body>

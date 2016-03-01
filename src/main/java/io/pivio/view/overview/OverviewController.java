@@ -21,7 +21,7 @@ public class OverviewController {
     public String main() {
         return "redirect:/app/overview";
     }
-
+// fields=servicename,description,name,team,belongs_to_bounded_context&sort=name:asc
     @RequestMapping("/app/overview")
     public String overview(Model model) {
         model.addAttribute("config", serverConfig);

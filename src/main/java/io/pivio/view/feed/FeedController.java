@@ -1,10 +1,7 @@
 package io.pivio.view.feed;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.pivio.view.PivioController;
 import io.pivio.view.configuration.ServerConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +14,6 @@ import java.util.List;
 
 @Controller
 public class FeedController {
-
-    private final Logger log = LoggerFactory.getLogger(PivioController.class);
 
     @Autowired
     ServerConfig serverConfig;

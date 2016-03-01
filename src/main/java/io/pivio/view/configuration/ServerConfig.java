@@ -9,4 +9,5 @@ import java.util.List;
 public class ServerConfig {
     public List pages = new ArrayList(); // show nothing for default
     public String apiAddress = "http://localhost:9123"; // default
+    public String mainUrl = "http://localhost:8080"; // needs to be determined later to match the host with the 'main' app.
 }

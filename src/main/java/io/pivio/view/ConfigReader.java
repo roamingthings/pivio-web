@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class ConfigReader {
@@ -24,7 +25,13 @@ public class ConfigReader {
     @PostConstruct
     void readArguments() {
         try {
-            serverConfig.pages = readYamlFile(configFile);
+            Map<String, Object> objectMap = readYamlFile(configFile);
+            if (objectMap.containsKey("pages")) {
+                serverConfig.pages = (List) objectMap.get("pages");
+            }
+            if (objectMap.containsKey("api")) {
+                serverConfig.apiAddress = (String) objectMap.get("api");
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -34,7 +41,7 @@ public class ConfigReader {
     }
 
 
-    List readYamlFile(String yamlFile) throws FileNotFoundException, UnsupportedEncodingException {
+    Map<String, Object> readYamlFile(String yamlFile) throws FileNotFoundException, UnsupportedEncodingException {
         File file = new File(yamlFile);
         BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
         YamlReader yamlReader = new YamlReader(in);
@@ -46,7 +53,7 @@ public class ConfigReader {
             e.printStackTrace();
         }
 
-        return (List) object;
+        return (Map<String, Object>) object;
     }
 
 

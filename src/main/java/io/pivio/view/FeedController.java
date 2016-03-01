@@ -8,16 +8,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class PivioController {
+public class FeedController {
 
     private final Logger log = LoggerFactory.getLogger(PivioController.class);
 
     @Autowired
     ServerConfig serverConfig;
 
-    @RequestMapping("/")
-    public String main(Model model) {
+    @RequestMapping("/app/feed")
+    public String overview(Model model) {
         model.addAttribute("config", serverConfig);
-        return "overview";
+        return "feed";
     }
+
 }

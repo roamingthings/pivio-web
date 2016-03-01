@@ -1,0 +1,16 @@
+- description: Overview
+  path: /main
+  url: http://localhost:8080/app/overview
+  id: tabOverview
+- description: Search
+  path: /search
+  url: http://localhost:8080/app/search
+  id: tabSearch
+- description: Service Graph
+  path: /graph
+  url: http://localhost:8080/app/graph
+  id: tabGraph
+- description: Feed
+  path: /feed
+  url: http://localhost:8080/app/feed
+  id: tabFeed

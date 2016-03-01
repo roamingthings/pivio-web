@@ -2,7 +2,7 @@ package io.pivio.view.feed;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.pivio.view.PivioController;
-import io.pivio.view.ServerConfig;
+import io.pivio.view.configuration.ServerConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

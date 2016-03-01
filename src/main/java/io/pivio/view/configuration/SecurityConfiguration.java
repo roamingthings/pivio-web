@@ -1,4 +1,4 @@
-package io.pivio.view;
+package io.pivio.view.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

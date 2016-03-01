@@ -1,4 +1,4 @@
-package io.pivio.view;
+package io.pivio.view.configuration;
 
 import org.springframework.stereotype.Component;
 

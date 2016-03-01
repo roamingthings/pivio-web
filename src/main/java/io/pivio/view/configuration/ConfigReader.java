@@ -1,4 +1,4 @@
-package io.pivio.view;
+package io.pivio.view.configuration;
 
 import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;

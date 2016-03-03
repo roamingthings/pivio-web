@@ -7,15 +7,204 @@
 </head>
 <body>
 <div th:fragment="content">
-    <script th:inline="javascript">
-    /*<![CDATA[*/
-    var pivioDocumentId = /*[[${pivioDocumentId}]]*/ '';
-    /*]]>*/
+
+    <script id="detail-template" type="text/x-handlebars-template">
+
+        <div class="ui two column grid">
+            <div class="column">
+                <div class="ui  segment">
+                    <!--GENERAL ===-->
+                    <div class="ui teal top attached label">General</div>
+                    <div class="ui  basic ribbon label">Description</div>
+
+                    <h1 class="ui header">{{name}}</h1>
+
+                    <p>{{description}}</p>
+
+                    <p>
+
+                    <div class="ui  basic label">
+                        <i class="users icon"></i> Team
+                        <div class="detail">{{team}}</div>
+                    </div>
+
+                    {{#if status}}
+                    <div class="ui  basic label">
+                        <i class="users icon"></i> Status
+                        <div class="detail"><i class="star icon yellow"></i>{{status}}</div>
+                    </div>
+                    {{/if}}
+
+                    {{#if contact}}
+                    <div class="ui  basic label">
+                        <i class="users icon"></i> Contact
+                        <div class="detail">{{contact}}</div>
+                    </div>
+                    {{/if}}
+
+                    {{#if bounded_context}}
+                    <div class="ui  basic label">
+                        <i class="circle thin icon"></i> Context
+                        <div class="detail">{{bounded_context}}</div>
+                    </div>
+                    {{/if}}
+
+                    {{#if vcs}}
+                    <div class="ui  basic label ctrx-label">
+                        <i class="file text outline icon"></i> Source
+                        <div class="detail">{{vcs}}</div>
+                    </div>
+                    {{/if}}
+
+                    </p>
+
+                    {{#if links}}
+                    <a class="ui basic ribbon label"><i class="browser icon"></i>Links</a>
+
+                    <p>
+                        {{#eachInMap links}}
+
+                    <div class="ui basic label"><a href="{{value}}">{{key}}</a></div>
+                    {{/eachInMap}}
+                    {{/if}}
+                    </p>
+                </div>
+
+                <!--RUNTIME ===-->
+
+                {{#if runtime}}
+                <div class="ui segment">
+                    <a class="ui blue top attached label">Service Specs</a>
+
+                    <p></p>
+
+                    <div class="ui label basic ctrx-label">
+                        RAM
+                        <div class="detail">{{runtime.ram}}</div>
+                    </div>
+
+                    <div class="ui label basic ctrx-label">
+                        CPU
+                        <div class="detail">{{runtime.cpu}}</div>
+                    </div>
+
+                    <div class="ui label basic ctrx-label">
+                        Disk
+                        <div class="detail">{{runtime.disk}}</div>
+                    </div>
+
+                </div>
+                {{/if}}
+
+
+            </div>
+
+            <!--NETWORK === -->
+
+            <div class="column">
+                {{#if provides}}
+                <div class="ui segment">
+                    <div class="ui yellow top attached label">Network</div>
+
+                    <!-- Incoming Network -->
+                    <div class="ui ribbon left basic label"><i class="arrow right icon"></i>Incoming Network</div>
+
+                    <p>
+                        {{#each network_incoming}}
+
+                    <div class="ui basic label ctrx-label">
+                        {{this.servicename}}
+                        <div class="detail">{{this.port}}</div>
+                    </div>
+                    {{/each}}
+                    </p>
+
+
+                    <!-- Provides -->
+                    {{#if provides}}
+                    <div class="ui ribbon left basic label"><i class="cube icon"></i>Provides</div>
+                    <p>
+                        {{#each provides}}
+
+                    <div class="ui basic label">{{this.servicename}}
+                        <div class="detail">{{this.port}} {{this.defaultport}}</div>
+                    </div>
+                    {{/each}}
+                    </p>
+                    {{/if}}
+
+
+                    <!-- Outgoing Network -->
+                    <div class="ui ribbon left basic label"><i class="arrow left icon"></i>Outgoing Network</div>
+                    <p>
+                        {{#each network_outgoing}}
+
+                    <div class="ui basic label ctrx-label">
+                        {{this.service}}
+
+                        <div class="detail">{{this.port}}</div>
+                    </div>
+                    {{/each}}
+                    </p>
+
+
+                    <!-- Network Zone -->
+                    {{#if network_zone}}
+                    <div class="ui ribbon basic left  label"><i class="cubes icon"></i>Network Zone</div>
+
+                    <p></p>
+
+                    <div class="ui label basic ctrx-label">
+                        {{network_zone}}
+                    </div>
+                    {{/if}}
+
+                </div>
+                {{/if}}
+
+                <!--SOFTWARE DEPENDENCIES ===-->
+                <div class="ui segment">
+
+                    <!-- Software dependencies -->
+                    <a class="ui top attached red label">Software</a>
+
+                    <p>
+                        <a class="ui  ribbon left basic label">Dependencies</a>
+                        {{#each software_dependencies}}
+
+                    <div class="ui label basic crtx-label">
+                        {{this.name}}
+                        <div class="detail">{{this.version}}</div>
+                    </div>
+                    {{/each}}
+
+                    </p>
+
+                    <!-- Licenses -->
+                    <a class="ui ribbon left basic label">Used Licenses</a>
+
+                    <p>
+                        {{#each software_licenses}}
+
+                    <div class="ui label basic crtx-label">{{this}}</div>
+                    {{/each}}
+                    </p>
+                </div>
+            </div>
+        </div>
     </script>
+
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var pivioDocumentId = /*[[${pivioDocumentId}]]*/ '';
+        /*]]>*/
+    </script>
+
     <script src="/js/detail.js"></script>
 
-    <div th:text="${pivioDocumentId}"></div>
 
+    <div id="overview-detail"></div>
 
 </div>
 </body>

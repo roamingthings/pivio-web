@@ -21,7 +21,7 @@ public class OverviewController {
     public String main() {
         return "redirect:/app/overview";
     }
-// fields=servicename,description,name,team,belongs_to_bounded_context&sort=name:asc
+
     @RequestMapping("/app/overview")
     public String overview(Model model) {
         model.addAttribute("config", serverConfig);
@@ -29,10 +29,11 @@ public class OverviewController {
         return "overview";
     }
 
-    @RequestMapping("/app/overview/{id}")
+    @RequestMapping("/app/detail/{id}")
     public String detail(@PathVariable String id, Model model) {
         model.addAttribute("config", serverConfig);
         model.addAttribute("pageId", "tabOverview");
+        model.addAttribute("pivioDocumentId", id);
         return "detail";
     }
 

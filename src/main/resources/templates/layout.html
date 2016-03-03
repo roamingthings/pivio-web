@@ -29,6 +29,7 @@
         <script th:inline="javascript">
             /*<![CDATA[*/
             var pageId = /*[[${pageId}]]*/ '';
+            var apiserver = /*[[${config.apiAddress}]]*/ '';
             /*]]>*/
             $("#" + pageId).addClass("active");
         </script>

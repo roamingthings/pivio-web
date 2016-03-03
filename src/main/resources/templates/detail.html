@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="layout :: page">
+<head>
+    <title>Main</title>
+</head>
+<body>
+<div th:fragment="content">
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+    var pivioDocumentId = /*[[${pivioDocumentId}]]*/ '';
+    /*]]>*/
+    </script>
+    <script src="/js/detail.js"></script>
+
+    <div th:text="${pivioDocumentId}"></div>
+
+
+</div>
+</body>
+</html>

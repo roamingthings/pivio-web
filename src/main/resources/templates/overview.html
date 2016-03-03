@@ -10,7 +10,7 @@
 
     <script id="card" type="text/x-handlebars-template">
         {{#each this}}
-        <a class="ui blue card" data-meta="{{meta}}" href="/detail/index.html?id={{id}}">
+        <a class="ui blue card" data-meta="{{meta}}" href="/app/detail/{{id}}">
             <div class="content">
                 {{#if servicename}}
                 <div class="right floated mini ui crtx-service">{{servicename}}</div>
@@ -44,22 +44,15 @@
         {{/each}}
     </script>
 
-
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        var apiserver = /*[[${config.apiAddress}]]*/ '';
-        /*]]>*/
-    </script>
     <script src="/js/overview.js"></script>
 
     <div class="ui container centered">
         <div class="ui icon input">
-            <input id="searchbox" type="text" size="30" autofocus="autofocus" placeholder="Search..."/>
+            <input id="searchbox" type="text" size="30" autofocus="autofocus" placeholder="Quick Search..."/>
             <i class="search icon"></i>
         </div>
     </div>
     <h4 class="ui horizontal divider header">
-        <i class="tag icon"></i>
         Matching Artefacts
     </h4>
 

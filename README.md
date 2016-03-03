@@ -2,6 +2,11 @@
 
 This is a first shot on how to view things in the DB.
 
+This is totally minimal and using Spring/Java here is just to have some framework around to do some templating.
+Maybe extend it later to have some plugins. For now just passing links around.
+
+You can include 'external' websites and if you need to access the config of this service ask http://<pivio-view>:<port>/config .
+
 # ALPHA - ALPHA - ALPHA
 
 ```

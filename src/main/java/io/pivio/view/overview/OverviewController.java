@@ -22,7 +22,6 @@ public class OverviewController {
     @Autowired
     ServerConfig serverConfig;
 
-
     @RequestMapping("/")
     public String main() {
         return "redirect:/app/overview";
@@ -40,7 +39,6 @@ public class OverviewController {
         model.addAttribute("config", serverConfig);
         model.addAttribute("pageId", "tabOverview");
         model.addAttribute("pivioDocumentId", id);
-
         return "detail";
     }
 

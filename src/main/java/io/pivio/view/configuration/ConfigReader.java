@@ -37,9 +37,7 @@ public class ConfigReader {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
     }
-
 
     Map<String, Object> readYamlFile(String yamlFile) throws FileNotFoundException, UnsupportedEncodingException {
         File file = new File(yamlFile);
@@ -55,6 +53,4 @@ public class ConfigReader {
 
         return (Map<String, Object>) object;
     }
-
-
 }

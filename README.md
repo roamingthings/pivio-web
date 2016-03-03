@@ -7,6 +7,8 @@ Maybe extend it later to have some plugins. For now just passing links around.
 
 You can include 'external' websites and if you need to access the config of this service ask http://<pivio-view>:<port>/config .
 
+It could very well be just a bunch of html and javascript. All the queries are done in Javascript.
+
 # ALPHA - ALPHA - ALPHA
 
 ```

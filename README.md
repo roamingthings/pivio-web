@@ -7,7 +7,7 @@ Maybe extend it later to have some plugins. For now just passing links around.
 
 You can include 'external' websites and if you need to access the config of this service ask http://<pivio-view>:<port>/config .
 
-It could very well be just a bunch of html and javascript. All the queries are done in Javascript.
+It could very well be just a bunch of html and javascript. All the queries are done in Javascript. Templating inside JS is done with handlebars. Sounds a bit crazy but of you want to contribute ... you are very welcome ;-).
 
 # ALPHA - ALPHA - ALPHA
 
@@ -33,6 +33,7 @@ pages:
   - description: Feed
     url: /app/feed
     id: tabFeed
+```
 
 # Run
 

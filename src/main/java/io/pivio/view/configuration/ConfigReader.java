@@ -16,7 +16,7 @@ import java.util.Map;
 public class ConfigReader {
 
 
-    @Value("${config}")
+    @Value(value = "${config}")
     String configFile;
 
     @Autowired

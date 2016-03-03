@@ -7,11 +7,11 @@ pages:
     url: http://localhost:8080/app/query
     id: tabQuery
   - description: Service Graph
-    url: http://localhost:8080/app/graph
-    id: tabGraph
+    url: http://localhost:8080/app/servicegraph
+    id: tabServiceGraph
   - description: Feed
     url: http://localhost:8080/app/feed
     id: tabFeed
-  - description: Extern
-    url: http://localhost:2015/
-    id: tabExtern
+#  - description: Extern
+#    url: http://localhost:2015/
+#    id: tabExtern

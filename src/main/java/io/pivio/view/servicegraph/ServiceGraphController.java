@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ServiceGraphController {
 
-    @Autowired
-    ServerConfig serverConfig;
+  @Autowired
+  ServerConfig serverConfig;
 
-    @RequestMapping(value = "/app/servicegraph")
-    public String graph(Model model) {
-        model.addAttribute("config", serverConfig);
-        model.addAttribute("pageId", "tabServiceGraph");
-        return "servicegraph";
-    }
+  @RequestMapping(value = "/app/servicegraph")
+  public String graph(Model model) {
+    model.addAttribute("config", serverConfig);
+    model.addAttribute("pageId", "tabServiceGraph");
+    return "servicegraph";
+  }
 }

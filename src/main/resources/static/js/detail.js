@@ -53,8 +53,6 @@ $(function () {
             var source = $('#detail-template').html(),
                 template = Handlebars.compile(source);
 
-            console.log(template(detail));
-
             $('#overview-detail').append(template(detail));
         }
 
@@ -113,10 +111,18 @@ $(function () {
 
         if (service.dependencies) {
             service.dependencies.map((dependency) => {
-                if (dependency.licences) {
-                    dependency.licences.map((license) => {
-                        licenses[license.name] = license.name; // we just need the keys
-                    })
+                console.log(dependency);
+                if (dependency.hasOwnProperty('licenses')) {
+                    for (var i = 0; i < dependency.licenses.length; i++) {
+                        licenses[dependency.licenses[i].name] =  dependency.licenses[i].name; // we just need the keys
+                    }
+
+                    //dependency.licences.map((license) => {
+                    //    if (license != undefined) {
+                    //        licenses[license.name] = license.name; // we just need the keys
+                    //    }
+                    //})
+
                 }
             });
         }

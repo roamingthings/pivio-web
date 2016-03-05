@@ -32,6 +32,7 @@ $(function () {
                 network_zone: service.network_zone,
                 runtime: service.runtime,
                 contact: service.contact,
+                tags: service.tags,
                 bounded_context: service.belongs_to_bounded_context,
                 software_dependencies: getDependencies(service),
                 software_licenses: getLicenses(service)

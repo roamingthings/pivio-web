@@ -58,6 +58,15 @@
 
                     </p>
 
+                    {{#if tags}}
+                        {{#each tags}}
+                            <a class="ui tag label" href="/app/overview/list?field=tags&amp;value={{this}}">{{this}}</a>
+                        {{/each}}
+
+                    {{/if}}
+
+                    <p/>
+
                     {{#if links}}
                     <div class="ui basic ribbon label"><i class="browser icon"></i>Links</div>
 
@@ -78,17 +87,17 @@
 
                     <p></p>
 
-                    <div class="ui label basic ctrx-label">
+                    <div class="ui label basic">
                         RAM
                         <div class="detail">{{runtime.ram}}</div>
                     </div>
 
-                    <div class="ui label basic ctrx-label">
+                    <div class="ui label basic">
                         CPU
                         <div class="detail">{{runtime.cpu}}</div>
                     </div>
 
-                    <div class="ui label basic ctrx-label">
+                    <div class="ui label basic">
                         Disk
                         <div class="detail">{{runtime.disk}}</div>
                     </div>

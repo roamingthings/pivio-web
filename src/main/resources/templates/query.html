@@ -12,7 +12,11 @@
     <form class="ui form">
         <div class="field">
             <label class=" ui label">Query</label>
-            <textarea id="query" placeholder="{'match':{'belongs_to_bounded_context':'News'}}"></textarea>
+            <textarea id="query" placeholder="{'match':{'belongs_to_bounded_context':'News'}}">{
+    "match": {
+        "dependencies.name": "lucene"
+    }
+}</textarea>
         </div>
         <div class="field">
             <label class=" ui label">Fields</label>

@@ -19,14 +19,17 @@
 
 
     <script id="list-template" type="text/x-handlebars-template">
+
+        <h4 class="ui horizontal divider header">
+            {{pivioField}} : {{pivioValue}}
+        </h4>
+
+
         {{#each this}}
         <div class="ui  basic label"><a href="/app/overview/detail/{{id}}">{{name}}</a></div>
         {{/each}}
     </script>
 
-    <h4 th:text="${value}" class="ui horizontal divider header">
-
-    </h4>
 
 
     <div id="list">

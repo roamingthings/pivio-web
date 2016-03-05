@@ -2,6 +2,7 @@ $(function () {
     $("#resultarea").hide();
 
     $("#submit").click(function () {
+        $("#resultarea").hide();
 
         var fieldInput = $("#fields").val().replace(/ /g, '');
         var queryInput = $("#query").val();

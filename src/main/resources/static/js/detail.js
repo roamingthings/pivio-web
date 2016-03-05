@@ -35,7 +35,9 @@ $(function () {
                 tags: service.tags,
                 bounded_context: service.belongs_to_bounded_context,
                 software_dependencies: getDependencies(service),
-                software_licenses: getLicenses(service)
+                software_licenses: getLicenses(service),
+                last_upload: prettyDate(service.lastUpload),
+                last_update: prettyDate(service.lastUpdate)
             };
 
             Handlebars.registerHelper('eachInMap', (map, block) => {

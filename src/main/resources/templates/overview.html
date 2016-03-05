@@ -10,10 +10,10 @@
 
     <script id="card" type="text/x-handlebars-template">
         {{#each this}}
-        <a class="ui blue card" data-meta="{{meta}}" href="/app/detail/{{id}}">
+        <a class="ui blue card" data-meta="{{meta}}" href="/app/overview/detail/{{id}}">
             <div class="content">
                 {{#if servicename}}
-                <div class="right floated mini ui crtx-service">{{servicename}}</div>
+                <div class="right floated mini ui ">{{servicename}}</div>
                 {{/if}}
                 <div class="header">
                     {{name}}

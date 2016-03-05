@@ -25,7 +25,7 @@
 
                     <div class="ui  basic label">
                         <i class="users icon"></i> Team
-                        <div class="detail">{{team}}</div>
+                        <div class="detail"><a href="/app/overview/list?field=team&amp;value={{team}}">{{team}}</a></div>
                     </div>
 
                     {{#if status}}
@@ -45,7 +45,7 @@
                     {{#if bounded_context}}
                     <div class="ui  basic label">
                         <i class="circle thin icon"></i> Context
-                        <div class="detail">{{bounded_context}}</div>
+                        <div class="detail"><a href="/app/overview/list?field=belongs_to_bounded_context&amp;value={{bounded_context}}">{{bounded_context}}</a></div>
                     </div>
                     {{/if}}
 
@@ -139,8 +139,8 @@
                     <p>
                         {{#each network_outgoing}}
 
-                    <div class="ui basic label ctrx-label">
-                        {{this.service}}
+                    <div class="ui basic label">
+                    <a href="/app/overview/detail/{{id}}">{{this.service}}</a>
 
                         <div class="detail">{{this.port}}</div>
                     </div>
@@ -154,8 +154,8 @@
 
                     <p></p>
 
-                    <div class="ui label basic ctrx-label">
-                        {{network_zone}}
+                    <div class="ui label basic">
+                        <a href="/app/overview/list?field=network_zone&amp;value={{network_zone}}">{{network_zone}}</a>
                     </div>
                     {{/if}}
 
@@ -169,24 +169,25 @@
                     <a class="ui top attached red label">Software</a>
 
                     <p>
-                        <div class="ui  ribbon left basic label">Dependencies ({{software_dependencies.length}})</div>
-                        <ol class="ui list">
 
-                            {{#each software_dependencies}}
-                            <li value="-">{{this.name}}, {{this.version}}</li>
-                            {{/each}}
-                        </ol>
+                    <div class="ui  ribbon left basic label">Dependencies ({{software_dependencies.length}})</div>
+                    <ol class="ui list">
+                        {{#each software_dependencies}}
+                        <li value="-"><a href="/app/overview/list?field=dependencies.name&amp;value={{this.name}}">{{this.name}}</a>, {{this.version}}</li>
+                        {{/each}}
+                    </ol>
 
                     </p>
 
                     <!-- Licenses -->
+
                     <div class="ui ribbon left basic label">Used Licenses ({{software_licenses.length}})</div>
                     <p>
                     <ol class="ui list">
                         {{#each software_licenses}}
 
-                        <li value="-">{{this}}</li>
-                    {{/each}}
+                        <li value="-"><a href="/app/overview/list?field=dependencies.licenses.name&amp;value={{this}}">{{this}}</a></li>
+                        {{/each}}
                     </ol>
                     </p>
                 </div>

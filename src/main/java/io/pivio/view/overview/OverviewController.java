@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class OverviewController {
@@ -29,12 +30,21 @@ public class OverviewController {
     return "overview";
   }
 
-  @RequestMapping("/app/detail/{id}")
+  @RequestMapping("/app/overview/detail/{id}")
   public String detail(@PathVariable String id, Model model) {
     model.addAttribute("config", serverConfig);
     model.addAttribute("pageId", "tabOverview");
     model.addAttribute("pivioDocumentId", id);
     return "detail";
+  }
+
+  @RequestMapping("/app/overview/list")
+  public String similar(@RequestParam("field") String field, @RequestParam("value") String value, Model model) {
+    model.addAttribute("config", serverConfig);
+    model.addAttribute("pageId", "tabOverview");
+    model.addAttribute("field", field);
+    model.addAttribute("value", value);
+    return "list";
   }
 
 }

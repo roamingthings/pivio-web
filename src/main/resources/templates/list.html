@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="layout :: page">
+<head>
+    <title>Main</title>
+</head>
+<body>
+<div th:fragment="content">
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var field = /*[[${field}]]*/ '';
+        var value = /*[[${value}]]*/ '';
+        /*]]>*/
+    </script>
+
+    <script src="/js/list.js"></script>
+
+
+    <script id="list-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="ui  basic label"><a href="/app/overview/detail/{{id}}">{{name}}</a></div>
+        {{/each}}
+    </script>
+
+    <h4 th:text="${value}" class="ui horizontal divider header">
+
+    </h4>
+
+
+    <div id="list">
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -8,10 +8,43 @@
 <body>
 <div th:fragment="content">
 
-    <table class="ui definition table">
-        <tbody>
-        </tbody>
-    </table>
+    <script src="/js/feed.js"></script>
+    <script src="/js/prettyDate.js"></script>
+
+
+    <script id="feed-template" type="text/x-handlebars-template">
+
+        <table class="ui celled striped table">
+            <thead>
+            <tr>
+                <th>Who</th>
+                <th>What</th>
+                <th>From</th>
+                <th>To</th>
+                <th>When?</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each this}}
+            <tr>
+                <td class="collapsing">{{document}}</td>
+                <td>{{field}}</td>
+                <td>{{previous}}</td>
+                <td>{{current}}</td>
+                <td class="right aligned collapsing">{{date}}</td>
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+
+
+        <div>{{date}} {{document}} {{field}} {{previous}} {{current}}</div>
+    </script>
+
+
+    <div id="feed">
+
+    </div>
 
 </div>
 </body>

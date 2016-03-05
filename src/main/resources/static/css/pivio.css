@@ -9,3 +9,7 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 .ui.label {
     margin-bottom: 5px;
 }
+
+.ui.label a {
+    color: cornflowerblue;
+}

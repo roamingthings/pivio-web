@@ -59,7 +59,7 @@
                     </p>
 
                     {{#if links}}
-                    <a class="ui basic ribbon label"><i class="browser icon"></i>Links</a>
+                    <div class="ui basic ribbon label"><i class="browser icon"></i>Links</div>
 
                     <p>
                         {{#eachInMap links}}
@@ -169,7 +169,7 @@
                     <a class="ui top attached red label">Software</a>
 
                     <p>
-                        <a class="ui  ribbon left basic label">Dependencies ({{software_dependencies.length}})</a>
+                        <div class="ui  ribbon left basic label">Dependencies ({{software_dependencies.length}})</div>
                         <ol class="ui list">
 
                             {{#each software_dependencies}}
@@ -180,7 +180,7 @@
                     </p>
 
                     <!-- Licenses -->
-                    <a class="ui ribbon left basic label">Used Licenses ({{software_licenses.length}})</a>
+                    <div class="ui ribbon left basic label">Used Licenses ({{software_licenses.length}})</div>
                     <p>
                     <ol class="ui list">
                         {{#each software_licenses}}

@@ -11,7 +11,7 @@ $(function () {
     });
 
     $.ajax({
-        url: `${apiserver}/document?${encodeURI('fields=id,description,name,team,belongs_to_bounded_context&sort=name:asc')}`,
+        url: `${apiserver}/document?${encodeURI('fields=id,description,name,team,belongs_to_bounded_context,lastUpdate,lastUpload&sort=name:asc')}`,
         dataType: 'json',
         cache: false,
         success: function configureApp(documents) {
@@ -26,6 +26,8 @@ $(function () {
                         name: document.name,
                         team: document.team,
                         bounded_context: document.belongs_to_bounded_context,
+                        last_update: prettyDate(document.lastUpdate),
+                        last_upload: prettyDate(document.lastUpload),
                         meta: (document.description + " " + document.name + " " + document.team + " " + document.belongs_to_bounded_context).toLowerCase()
                         };
 

@@ -169,25 +169,25 @@
                     <a class="ui top attached red label">Software</a>
 
                     <p>
-                        <a class="ui  ribbon left basic label">Dependencies</a>
-                        {{#each software_dependencies}}
+                        <a class="ui  ribbon left basic label">Dependencies ({{software_dependencies.length}})</a>
+                        <ol class="ui list">
 
-                    <div class="ui label basic crtx-label">
-                        {{this.name}}
-                        <div class="detail">{{this.version}}</div>
-                    </div>
-                    {{/each}}
+                            {{#each software_dependencies}}
+                            <li value="-">{{this.name}}, {{this.version}}</li>
+                            {{/each}}
+                        </ol>
 
                     </p>
 
                     <!-- Licenses -->
-                    <a class="ui ribbon left basic label">Used Licenses</a>
-
+                    <a class="ui ribbon left basic label">Used Licenses ({{software_licenses.length}})</a>
                     <p>
+                    <ol class="ui list">
                         {{#each software_licenses}}
 
-                    <div class="ui label basic crtx-label">{{this}}</div>
+                        <li value="-">{{this}}</li>
                     {{/each}}
+                    </ol>
                     </p>
                 </div>
             </div>

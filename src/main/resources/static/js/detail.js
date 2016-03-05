@@ -91,18 +91,24 @@ $(function () {
 
     function getDependencies(service) {
         var
-            dependencies = [];
+            dependencies = {},
+            result = [];
 
         if (service.dependencies) {
             service.dependencies.map((dependency) => {
-                dependencies.push({
+                dependencies[dependency.name] = ({
                     name: dependency.name,
                     version: dependency.version
                 })
             });
         }
 
-        return dependencies;
+        var sortedKeys = Object.keys(dependencies).sort();
+
+        for (var i = 0; i < sortedKeys.length; i++) {
+            result.push(dependencies[sortedKeys[i]]);
+        }
+        return result;
     }
 
     function getLicenses(service) {
@@ -114,20 +120,13 @@ $(function () {
                 console.log(dependency);
                 if (dependency.hasOwnProperty('licenses')) {
                     for (var i = 0; i < dependency.licenses.length; i++) {
-                        licenses[dependency.licenses[i].name] =  dependency.licenses[i].name; // we just need the keys
+                        licenses[dependency.licenses[i].name] = dependency.licenses[i].name; // we just need the keys
                     }
-
-                    //dependency.licences.map((license) => {
-                    //    if (license != undefined) {
-                    //        licenses[license.name] = license.name; // we just need the keys
-                    //    }
-                    //})
-
                 }
             });
         }
 
-        return Object.keys(licenses);
+        return Object.keys(licenses).sort();
     }
 
     function networkOutgoing(service, servicename_map) {

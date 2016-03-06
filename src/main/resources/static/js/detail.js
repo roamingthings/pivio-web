@@ -21,7 +21,7 @@ $(function () {
                 team: service.team,
                 status: service.status,
                 context: service.context,
-                vcs: service.vcs,
+                vcs: service.vcsroot,
                 description: service.description,
                 links: service.links,
                 name: service.name,

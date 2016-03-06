@@ -1,7 +1,7 @@
-// from http://bl.ocks.org/mbostock/7607999
 $(function () {
 
     d3.json(apiserver + "/document?query=" + encodeURI('{"match":{"type":"service"}}'), function (error, raw) {
+        // from http://bl.ocks.org/mbostock/7607999
 
         var dependencies = [];
 
@@ -180,5 +180,54 @@ $(function () {
             });
             return talks_to;
         }
-    })
+    });
+
+    var url = `${apiserver}/document?fields=id,name,belongs_to_bounded_context&sort=belongs_to_bounded_context:asc`;
+
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        cache: false,
+        success: function showContexts(documents) {
+
+            var contexts = {};
+            for (var i=0;i<documents.length;i++) {
+                contexts[documents[i].belongs_to_bounded_context] = [];
+            }
+            for (var i=0;i<documents.length;i++) {
+                contexts[documents[i].belongs_to_bounded_context].push(documents[i].name);
+            }
+
+            var result = [];
+            for (var key in contexts) {
+                if (contexts.hasOwnProperty(key)) {
+                    result.push({
+                        "name": key,
+                        "services": contexts[key]
+                    });
+                }
+            }
+
+            console.log(result);
+
+            Handlebars.registerHelper('eachInMap', (map, block) => {
+                var out = '';
+
+                Object.keys(map).map((prop) => {
+                    out += block.fn({
+                        key: prop,
+                        value: map[prop]
+                    });
+                });
+
+                return out;
+            });
+
+
+            var source = $("#context-template").html(),
+                template = Handlebars.compile(source);
+            $('#context').append(template(result));
+        }
+    });
+
 });

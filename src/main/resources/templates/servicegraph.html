@@ -69,6 +69,27 @@
     <div id="graph">
 
     </div>
+    <script id="context-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="ui blue card">
+            <div class="content">
+                <h3 class="ui blue header">{{name}}</h3>
+
+                <ul class="ui top aligned">
+                    {{#each services}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        {{/each}}
+
+
+    </script>
+
+    <div id="context" class="ui cards container centered grey">
+
+    </div>
 
 </div>
 </body>

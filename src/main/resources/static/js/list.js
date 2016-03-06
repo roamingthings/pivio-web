@@ -3,8 +3,6 @@ $(function () {
     var searchQuery = encodeURI(`{"match":{"${field}":"'${value}'"}}`),
         url = `${apiserver}/document?query=${searchQuery}&fields=id,name`;
 
-    console.log(url);
-
     $.ajax({
         url: url,
         dataType: 'json',

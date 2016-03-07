@@ -4,13 +4,13 @@ $(function () {
         queriedService = $.get(`${apiserver}/document?query=${searchQuery}`),
         network_connections = $.get(`${apiserver}/document?fields=talks_to,provides,short_name`);
 
-    $.when(queriedService, network_connections).done((serviceData, networkData) => {
+    $.when(queriedService, network_connections).done(function (serviceData, networkData)  {
         if (serviceData[1] == "success" && networkData[1] == "success") {
 
             var service = serviceData[0][0]; // #WTF ?
             var servicename_map = {};
 
-            networkData[0].map((service) => {
+            networkData[0].map(function (service) {
                 servicename_map[service.short_name] = service.id;
             });
 
@@ -41,10 +41,10 @@ $(function () {
                 last_update: prettyDate(service.lastUpdate)
             };
 
-            Handlebars.registerHelper('eachInMap', (map, block) => {
+            Handlebars.registerHelper('eachInMap', function (map, block)  {
                 var out = '';
 
-                Object.keys(map).map((prop) => {
+                Object.keys(map).map(function (prop) {
                     out += block.fn({
                         key: prop,
                         value: map[prop]
@@ -66,7 +66,7 @@ $(function () {
         var provides = [];
 
         if (service.provides) {
-            service.provides.map((provide) => {
+            service.provides.map(function (provide)  {
                 const splitter = provide.split(":"),
                     name = splitter[0];
                 var port = "",
@@ -99,7 +99,7 @@ $(function () {
             result = [];
 
         if (service.dependencies) {
-            service.dependencies.map((dependency) => {
+            service.dependencies.map(function (dependency)  {
                 dependencies[dependency.name] = ({
                     name: dependency.name,
                     version: dependency.version
@@ -120,7 +120,7 @@ $(function () {
             licenses = [];
 
         if (service.dependencies) {
-            service.dependencies.map((dependency) => {
+            service.dependencies.map(function (dependency)  {
                 console.log(dependency);
                 if (dependency.hasOwnProperty('licenses')) {
                     for (var i = 0; i < dependency.licenses.length; i++) {
@@ -138,7 +138,7 @@ $(function () {
             outgoing = [];
 
         if (service.talks_to) {
-            service.talks_to.map((to) => {
+            service.talks_to.map(function (to)  {
                 const
                     servicename = to.split(":")[0],
                     path = to.split(":")[1],

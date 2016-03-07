@@ -2,7 +2,7 @@ $(function () {
 
     var searchQuery = encodeURI(`{"match":{"id":"'${pivioDocumentId}'"}}`),
         queriedService = $.get(`${apiserver}/document?query=${searchQuery}`),
-        network_connections = $.get(`${apiserver}/document?fields=talks_to,provides,servicename`);
+        network_connections = $.get(`${apiserver}/document?fields=talks_to,provides,short_name`);
 
     $.when(queriedService, network_connections).done((serviceData, networkData) => {
         if (serviceData[1] == "success" && networkData[1] == "success") {
@@ -11,7 +11,7 @@ $(function () {
             var servicename_map = {};
 
             networkData[0].map((service) => {
-                servicename_map[service.servicename] = service.id;
+                servicename_map[service.short_name] = service.id;
             });
 
             // build details to be shown
@@ -33,6 +33,7 @@ $(function () {
                 runtime: service.runtime,
                 contact: service.contact,
                 tags: service.tags,
+                short_name: service.short_name,
                 bounded_context: service.belongs_to_bounded_context,
                 software_dependencies: getDependencies(service),
                 software_licenses: getLicenses(service),

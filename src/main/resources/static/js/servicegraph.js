@@ -6,7 +6,7 @@ $(function () {
         var dependencies = [];
 
         raw.map(function (service) {
-            var sourceName = service.servicename;
+            var sourceName = service.short_name;
             var allTargets = [];
             if ('talks_to' in service) {
                 service.talks_to.map(function (target) {

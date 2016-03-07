@@ -12,7 +12,7 @@
 <body>
 
 <div class="ui container">
-    <div id="main_menu" class="ui inverted pointing menu">
+    <div id="main_menu" class="ui inverted  menu">
         <div class="item">
             <div class="ui animated black button" tabindex="0">
                 <div class="visible content">pivio</div>
@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <a class="item" th:each="page: ${config.pages}" th:id="${page.id}" th:href="${page.url}"
+        <a class="blue item " th:each="page: ${config.pages}" th:id="${page.id}" th:href="${page.url}"
            th:text="${page.description}">&nbsp;</a>
 
         <script th:inline="javascript">

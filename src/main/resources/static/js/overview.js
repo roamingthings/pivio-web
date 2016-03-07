@@ -11,7 +11,7 @@ $(function () {
     });
 
     $.ajax({
-        url: `${apiserver}/document?${encodeURI('fields=id,description,name,team,belongs_to_bounded_context,lastUpdate,lastUpload&sort=name:asc')}`,
+        url: `${apiserver}/document?${encodeURI('fields=short_name,id,description,name,team,belongs_to_bounded_context,lastUpdate,lastUpload&sort=name:asc')}`,
         dataType: 'json',
         cache: false,
         success: function configureApp(documents) {
@@ -25,11 +25,12 @@ $(function () {
                         description: document.description,
                         name: document.name,
                         team: document.team,
+                        short_name: document.short_name,
                         bounded_context: document.belongs_to_bounded_context,
                         last_update: prettyDate(document.lastUpdate),
                         last_upload: prettyDate(document.lastUpload),
-                        meta: (document.description + " " + document.name + " " + document.team + " " + document.belongs_to_bounded_context).toLowerCase()
-                        };
+                        meta: (document.short_name + " " + document.description + " " + document.name + " " + document.team + " " + document.belongs_to_bounded_context).toLowerCase()
+                    };
 
                     cards.push(card);
                 });

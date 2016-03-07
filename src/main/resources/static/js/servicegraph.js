@@ -210,10 +210,10 @@ $(function () {
 
             console.log(result);
 
-            Handlebars.registerHelper('eachInMap', (map, block) => {
+            Handlebars.registerHelper('eachInMap', function(map, block)  {
                 var out = '';
 
-                Object.keys(map).map((prop) => {
+                Object.keys(map).map(function (prop)  {
                     out += block.fn({
                         key: prop,
                         value: map[prop]

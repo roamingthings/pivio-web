@@ -6,6 +6,9 @@
 
 // Takes an ISO time and returns a string representing how
 // long ago the date represents.
+
+// Fix for Safari Browser to correctly know the time.
+
 function prettyDate(time) {
     var fixForSafari = (time || "").replace(/-/g, "/").replace(/[TZ]/g, " ");
     fixForSafari = fixForSafari.substr(0, fixForSafari.lastIndexOf("."));

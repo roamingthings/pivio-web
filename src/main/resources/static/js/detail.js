@@ -2,43 +2,50 @@ $(function () {
 
     var searchQuery = encodeURI(`{"match":{"id":"'${pivioDocumentId}'"}}`),
         queriedService = $.get(`${apiserver}/document?query=${searchQuery}`),
-        network_connections = $.get(`${apiserver}/document?fields=talks_to,provides,short_name`);
+        network_connections = $.get(`${apiserver}/document?fields=service.talks_to,service.provides,short_name,id`);
 
     $.when(queriedService, network_connections).done(function (serviceData, networkData)  {
         if (serviceData[1] == "success" && networkData[1] == "success") {
 
-            var service = serviceData[0][0]; // #WTF ?
+            var pivioDocument = serviceData[0][0]; // #WTF ?
             var servicename_map = {};
 
-            networkData[0].map(function (service) {
-                servicename_map[service.short_name] = service.id;
+            console.log(pivioDocument);
+
+            networkData[0].map(function (document) {
+                if (document.service) {
+                    document.service.provides.map(function (resource){
+                       console.log(resource);
+                        servicename_map[resource.service_name] = document.id;
+                    });
+                }
             });
 
             // build details to be shown
 
             var detail = {
-                id: service.id,
-                team: service.team,
-                status: service.status,
-                context: service.context,
-                vcs: service.vcsroot,
-                description: service.description,
-                links: service.links,
-                name: service.name,
-                network_outgoing: networkOutgoing(service, servicename_map),
+                id: pivioDocument.id,
+                team: pivioDocument.team,
+                status: pivioDocument.status,
+                context: pivioDocument.context,
+                vcs: pivioDocument.vcsroot,
+                description: pivioDocument.description,
+                links: pivioDocument.links,
+                name: pivioDocument.name,
+                network_outgoing: networkOutgoing(pivioDocument.service, servicename_map),
                 //network_incoming: networkIncoming(network_connections, service.servicename),
-                provides: networkProvides(service),
-                type: service.type,
-                network_zone: service.network_zone,
-                runtime: service.runtime,
-                contact: service.contact,
-                tags: service.tags,
-                short_name: service.short_name,
-                bounded_context: service.belongs_to_bounded_context,
-                software_dependencies: getDependencies(service),
-                software_licenses: getLicenses(service),
-                last_upload: prettyDate(service.lastUpload),
-                last_update: prettyDate(service.lastUpdate)
+                provides: networkProvides(pivioDocument.service),
+                type: pivioDocument.type,
+                network_zone: pivioDocument.network_zone,
+                runtime: pivioDocument.runtime,
+                contact: pivioDocument.contact,
+                tags: pivioDocument.tags,
+                short_name: pivioDocument.short_name,
+                bounded_context: pivioDocument.belongs_to_bounded_context,
+                software_dependencies: getDependencies(pivioDocument),
+                software_licenses: getLicenses(pivioDocument),
+                last_upload: prettyDate(pivioDocument.lastUpload),
+                last_update: prettyDate(pivioDocument.lastUpdate)
             };
 
             Handlebars.registerHelper('eachInMap', function (map, block)  {
@@ -67,25 +74,10 @@ $(function () {
 
         if (service.provides) {
             service.provides.map(function (provide)  {
-                const splitter = provide.split(":"),
-                    name = splitter[0];
-                var port = "",
-                    defaultport = "";
-
-                if (splitter.length > 1) {
-                    port = splitter[1];
-                }
-
-                if (splitter.length > 2) {
-                    defaultport = splitter[2];
-                }
-
                 const item = {
-                    servicename: name,
-                    port: port,
-                    defaultport: defaultport
+                    servicename: provide.service_name,
+                    port: provide.port
                 };
-
                 provides.push(item)
             });
         }
@@ -98,8 +90,8 @@ $(function () {
             dependencies = {},
             result = [];
 
-        if (service.dependencies) {
-            service.dependencies.map(function (dependency)  {
+        if (service.software_dependencies) {
+            service.software_dependencies.map(function (dependency)  {
                 dependencies[dependency.name] = ({
                     name: dependency.name,
                     version: dependency.version
@@ -119,9 +111,8 @@ $(function () {
         var
             licenses = [];
 
-        if (service.dependencies) {
-            service.dependencies.map(function (dependency)  {
-                console.log(dependency);
+        if (service.software_dependencies) {
+            service.software_dependencies.map(function (dependency)  {
                 if (dependency.hasOwnProperty('licenses')) {
                     for (var i = 0; i < dependency.licenses.length; i++) {
                         licenses[dependency.licenses[i].name] = dependency.licenses[i].name; // we just need the keys
@@ -140,12 +131,9 @@ $(function () {
         if (service.talks_to) {
             service.talks_to.map(function (to)  {
                 const
-                    servicename = to.split(":")[0],
-                    path = to.split(":")[1],
                     connection = {
-                        service: servicename,
-                        port: path,
-                        id: servicename_map[servicename]
+                        service: to,
+                        id: servicename_map[to]
                     };
 
                 outgoing.push(connection);

@@ -43,6 +43,7 @@ dependencies {
 	compile('com.esotericsoftware.yamlbeans:yamlbeans:1.08')
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.assertj:assertj-core:3.2.0')
 }
 
 

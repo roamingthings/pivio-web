@@ -62,7 +62,6 @@
                         {{#each tags}}
                             <a class="ui tag label" href="/app/overview/list?field=tags&amp;value={{this}}">{{this}}</a>
                         {{/each}}
-
                     {{/if}}
 
                     <p/>
@@ -71,8 +70,7 @@
                     <div class="ui basic ribbon label"><i class="browser icon"></i>Links</div>
 
                     <p>
-                        {{#eachInMap links}}
-
+                    {{#eachInMap links}}
                     <div class="ui basic label"><a href="{{value}}">{{key}}</a></div>
                     {{/eachInMap}}
                     {{/if}}
@@ -155,9 +153,7 @@
                         {{#each network_outgoing}}
 
                     <div class="ui basic label">
-                    <a href="/app/overview/detail/{{id}}">{{this.service}}</a>
-
-                        <div class="detail">{{this.port}}</div>
+                    <a href="/app/overview/detail/{{this.id}}">{{this.service}}</a>
                     </div>
                     {{/each}}
                     </p>

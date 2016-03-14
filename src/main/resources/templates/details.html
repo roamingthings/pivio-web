@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="layout :: page">
+<head>
+    <title>Main</title>
+</head>
+<body>
+<div th:fragment="content">
+
+    <!--@thymesVar id="pivio" type="io.pivio.view.overview.PivioDetail"-->
+
+    <div class="ui two column grid">
+        <div class="column">
+            <div class="ui  segment">
+                <!--GENERAL ===-->
+                <div class="ui teal top attached label">General</div>
+                <div class="ui  basic ribbon label">Description</div>
+
+                <h1 th:text="${pivio.name +' ('+ pivio.short_name+')'}" class="ui header"></h1>
+
+                <p th:text="${pivio.description}"></p>
+
+                <div class="ui  basic label">
+                    <i class="users icon"></i> Owner
+                    <div th:text="${pivio.owner}" class="detail"></div>
+                </div>
+
+                <div th:if="${pivio.status}" class="ui basic label">
+                    <i class="users icon"></i> Status
+                    <div class="detail" th:text="${pivio.status}"></div>
+                </div>
+
+                <div th:if="${pivio.contact}" class="ui basic label">
+                    <i class="users icon"></i> Contact
+                    <div th:text="${pivio.contact}" class="detail"></div>
+                </div>
+
+                <div th:if="${pivio.vcs}" class="ui basic label">
+                    <i class="file text outline icon"></i> Source
+                    <div class="detail" th:text="${pivio.vcs}"></div>
+                </div>
+
+                <div th:if="${pivio.context.belongs_to_bounded_context}" class="ui basic label">
+                    <i class="circle thin icon"></i> Context
+                    <div class="detail"><a th:text="${pivio.context.belongs_to_bounded_context}"></a></div>
+                </div>
+
+                <div th:if="${pivio.context.visibility}" class="ui basic label">
+                    <i class="circle thin icon"></i> Intended usage:
+                    <div class="detail"><a th:text="${pivio.context.visibility}"></a></div>
+                </div>
+
+
+                <div th:each="tag : ${pivio.tags}">
+                    <a class="ui tag label" th:text="${tag}"></a>
+                </div>
+
+                <p class="ui  basic ribbon label">Links</p>
+
+                <div th:if="${pivio.links}">
+
+                    <div th:each="link : ${pivio.links}" class="ui basic label">
+                        <a th:href="${link.value}" th:text="${link.key}"></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div th:if="${pivio.runtime}" class="ui segment">
+                <div class="ui blue top attached label">Runtime</div>
+
+                <div class="ui basic label"> RAM
+                    <div class="detail"><a th:text="${pivio.runtime.ram}"></a></div>
+                </div>
+                <div class="ui basic label"> CPU
+                    <div class="detail"><a th:text="${pivio.runtime.cpu}"></a></div>
+                </div>
+                <div class="ui basic label"> Disk
+                    <div class="detail"><a th:text="${pivio.runtime.disk}"></a></div>
+                </div>
+                <div class="ui basic label"> Host
+                    <div class="detail"><a th:text="${pivio.runtime.host_type}"></a></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- second column -->
+        <div class="column">
+            <div th:if="${pivio.network}" class="ui segment">
+                <div class="ui orange top attached label">Network</div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

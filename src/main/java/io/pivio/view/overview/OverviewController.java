@@ -13,38 +13,50 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class OverviewController {
 
-  private final Logger log = LoggerFactory.getLogger(OverviewController.class);
+    private final Logger log = LoggerFactory.getLogger(OverviewController.class);
 
-  @Autowired
-  ServerConfig serverConfig;
+    @Autowired
+    ServerConfig serverConfig;
 
-  @RequestMapping("/")
-  public String main() {
-    return "redirect:/app/overview";
-  }
+    @Autowired
+    DetailService detailService;
 
-  @RequestMapping("/app/overview")
-  public String overview(Model model) {
-    model.addAttribute("config", serverConfig);
-    model.addAttribute("pageId", "tabOverview");
-    return "overview";
-  }
+    @RequestMapping("/")
+    public String main() {
+        return "redirect:/app/overview";
+    }
 
-  @RequestMapping("/app/overview/detail/{id}")
-  public String detail(@PathVariable String id, Model model) {
-    model.addAttribute("config", serverConfig);
-    model.addAttribute("pageId", "tabOverview");
-    model.addAttribute("pivioDocumentId", id);
-    return "detail";
-  }
+    @RequestMapping("/app/overview")
+    public String overview(Model model) {
+        model.addAttribute("config", serverConfig);
+        model.addAttribute("pageId", "tabOverview");
+        return "overview";
+    }
 
-  @RequestMapping("/app/overview/list")
-  public String similar(@RequestParam("field") String field, @RequestParam("value") String value, Model model) {
-    model.addAttribute("config", serverConfig);
-    model.addAttribute("pageId", "tabOverview");
-    model.addAttribute("field", field);
-    model.addAttribute("value", value);
-    return "list";
-  }
+    @RequestMapping("/app/overview/detail/{id}")
+    public String detail(@PathVariable String id, Model model) {
+        model.addAttribute("config", serverConfig);
+        model.addAttribute("pageId", "tabOverview");
+        model.addAttribute("pivioDocumentId", id);
+        return "detail";
+    }
+
+    @RequestMapping("/app/overview/details/{id}")
+    public String details(@PathVariable String id, Model model) {
+        model.addAttribute("config", serverConfig);
+        model.addAttribute("pageId", "tabOverview");
+        model.addAttribute("pivio", detailService.getDetail(id));
+        return "details";
+    }
+
+
+    @RequestMapping("/app/overview/list")
+    public String similar(@RequestParam("field") String field, @RequestParam("value") String value, Model model) {
+        model.addAttribute("config", serverConfig);
+        model.addAttribute("pageId", "tabOverview");
+        model.addAttribute("field", field);
+        model.addAttribute("value", value);
+        return "list";
+    }
 
 }

@@ -59,10 +59,12 @@
                 <p class="ui  basic ribbon label">Links</p>
 
                 <div th:if="${pivio.links}">
+                    <p>
 
                     <div th:each="link : ${pivio.links}" class="ui basic label">
                         <a th:href="${link.value}" th:text="${link.key}"></a>
                     </div>
+                    </p>
                 </div>
 
             </div>
@@ -88,8 +90,8 @@
 
         <!-- second column -->
         <div class="column">
-            <div th:if="${pivio.network}" class="ui segment">
-                <div class="ui orange top attached label">Network</div>
+            <div th:if="${pivio.service}" class="ui segment">
+                <div class="ui orange top attached label">Service</div>
 
             </div>
 

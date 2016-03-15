@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PivioDetail {
 
     public String id;
@@ -24,14 +24,7 @@ public class PivioDetail {
     public Map<String, String> links = new HashMap<>();
     public Runtime runtime;
     public Network network;
-
-//    public String network_zone;
-
-    // links
-    // provides
-    // network_outgoing
-    //
-
+    public Service service;
 
     @Override
     public String toString() {

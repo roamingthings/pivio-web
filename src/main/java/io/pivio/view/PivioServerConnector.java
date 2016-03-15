@@ -25,6 +25,7 @@ public class PivioServerConnector {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", MediaType.APPLICATION_JSON_VALUE);
         String url = serverConfig.apiAddress + path + encodedQuery;
+        log.debug("Asking: "+url);
         ResponseEntity<T> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>("", headers), type);
         log.debug(response.getBody().toString());
         return response;

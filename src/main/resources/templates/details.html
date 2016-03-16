@@ -67,6 +67,11 @@
                     </p>
                 </div>
 
+                <div class="ui tiny label ">
+                    <i class="upload icon" th:text="${pivio.lastUpload}"></i> &nbsp;
+                    <i class="write icon" th:text="${pivio.lastUpdate}"></i>
+                </div>
+
             </div>
 
             <div th:if="${pivio.runtime}" class="ui segment">
@@ -110,7 +115,6 @@
 
                         <div th:each="dns : ${info.public_dns}" class="ui tag">
                             <div class="ui tag label" th:text="${dns}"></div>
-
                         </div>
 
                     </div>

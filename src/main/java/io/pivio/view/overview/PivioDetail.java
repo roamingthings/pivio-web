@@ -25,6 +25,9 @@ public class PivioDetail {
     public Runtime runtime;
     public Network network;
     public Service service;
+    public String created;
+    public String lastUpload;
+    public String lastUpdate;
 
     @Override
     public String toString() {

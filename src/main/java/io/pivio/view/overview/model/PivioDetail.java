@@ -1,11 +1,10 @@
-package io.pivio.view.overview;
+package io.pivio.view.overview.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static java.util.Collections.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PivioDetail {
@@ -28,6 +27,7 @@ public class PivioDetail {
     public String created;
     public String lastUpload;
     public String lastUpdate;
+    public List<SoftwareDependency> software_dependencies = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -47,5 +47,23 @@ public class PivioDetail {
                 ", runtime=" + runtime +
                 ", network=" + network +
                 '}';
+    }
+
+    public List getConsolidatedLicenses() {
+        List<String> result = new ArrayList<>();
+        for (SoftwareDependency software_dependency : software_dependencies) {
+            for (License license : software_dependency.licenses) {
+                if (!result.contains(license.name)) {
+                    result.add(license.name);
+                }
+            }
+        }
+        sort(result);
+        return result;
+    }
+
+    public List<SoftwareDependency> getSortedDependencies() {
+        sort(software_dependencies);
+        return software_dependencies;
     }
 }

@@ -2,7 +2,7 @@ package io.pivio.view;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.pivio.view.overview.PivioDetail;
+import io.pivio.view.overview.model.PivioDetail;
 import org.junit.Test;
 
 import java.io.IOException;

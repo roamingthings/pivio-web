@@ -8,7 +8,7 @@
 <body>
 <div th:fragment="content">
 
-    <!--@thymesVar id="pivio" type="io.pivio.view.overview.PivioDetail"-->
+    <!--@thymesVar id="pivio" type="io.pivio.view.overview.model.PivioDetail"-->
 
     <div class="ui two column grid">
         <div class="column">
@@ -41,14 +41,16 @@
                     <div class="detail" th:text="${pivio.vcs}"></div>
                 </div>
 
-                <div th:if="${pivio.context.belongs_to_bounded_context}" class="ui basic label">
-                    <i class="circle thin icon"></i> Context
-                    <div class="detail"><a th:text="${pivio.context.belongs_to_bounded_context}"></a></div>
-                </div>
+                <div th:if="${pivio.context}">
+                    <div th:if="${pivio.context.belongs_to_bounded_context}" class="ui basic label">
+                        <i class="circle thin icon"></i> Context
+                        <div class="detail"><a th:text="${pivio.context.belongs_to_bounded_context}"></a></div>
+                    </div>
 
-                <div th:if="${pivio.context.visibility}" class="ui basic label">
-                    <i class="circle thin icon"></i> Intended usage:
-                    <div class="detail"><a th:text="${pivio.context.visibility}"></a></div>
+                    <div th:if="${pivio.context.visibility}" class="ui basic label">
+                        <i class="circle thin icon"></i> Intended usage:
+                        <div class="detail"><a th:text="${pivio.context.visibility}"></a></div>
+                    </div>
                 </div>
 
 
@@ -56,7 +58,10 @@
                     <a class="ui tag label" th:text="${tag}"></a>
                 </div>
 
+                <p/>
+
                 <p class="ui  basic ribbon label">Links</p>
+
 
                 <div th:if="${pivio.links}">
                     <p>
@@ -113,8 +118,8 @@
 
                         <p/>
 
-                        <div th:each="dns : ${info.public_dns}" class="ui tag">
-                            <div class="ui tag label" th:text="${dns}"></div>
+                        <div th:each="dns : ${info.public_dns}" >
+                            <div class="ui label" th:text="${dns}"></div>
                         </div>
 
                     </div>
@@ -130,25 +135,41 @@
                     Internal
                 </h5>
 
-                <div class="ui basic label" th:each="connection : ${pivio.service.depends_on.internal}" th:text="${connection}"></div>
+                <div class="ui basic label" th:each="connection : ${pivio.service.depends_on.internal}"
+                     th:text="${connection}"></div>
 
                 <h5 class="header">
                     Public External
                 </h5>
+
                 <div class="ui card" th:each="connection : ${pivio.service.depends_on.external}">
                     <div class="content">
                         <div class="header" th:text="${connection.target}"></div>
                         <div class="meta" th:text="${connection.via}"></div>
                         <p th:text="${connection.why}"></p>
-                        <div class="ui basic label" th:text="${connection.transport_protocol}"></div>
 
+                        <div class="ui basic label" th:text="${connection.transport_protocol}"></div>
                     </div>
                 </div>
+            </div>
 
+            <!-- Software Dependencies -->
+
+            <div th:if="${pivio.software_dependencies}" class="ui segment">
+                <div class="ui red top attached label">Software Dependencies</div>
+                <div class="ui ribbon left basic label">In Use</div>
+                <ul class="ui list" th:each="dep : ${pivio.sortedDependencies}">
+                    <li th:text="${dep.name +' : '+ dep.version+' '}"></li>
+                </ul>
+
+                <p/>
+                <div class="ui ribbon left basic label">Licenses</div>
+                <ul class="ui list" th:each="license : ${pivio.consolidatedLicenses}">
+                    <li th:text="${license}"></li>
+                </ul>
 
 
             </div>
-
 
         </div>
     </div>

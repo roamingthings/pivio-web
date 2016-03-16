@@ -1,4 +1,4 @@
-package io.pivio.view.overview;
+package io.pivio.view.overview.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

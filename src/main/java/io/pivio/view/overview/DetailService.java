@@ -2,6 +2,7 @@ package io.pivio.view.overview;
 
 import io.pivio.view.PivioServerConnector;
 import io.pivio.view.configuration.ServerConfig;
+import io.pivio.view.overview.model.PivioDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

@@ -92,8 +92,59 @@
         <div class="column">
             <div th:if="${pivio.service}" class="ui segment">
                 <div class="ui orange top attached label">Service</div>
+                <div class="ui ribbon left basic label"><i class="arrow right icon"></i>Is used by</div>
+
+                <p/>
+
+                <div class="ui ribbon left basic label"><i class="cube icon"></i>Provides</div>
+
+                <p/>
+
+                <div th:each="info : ${pivio.service.provides}" class="ui card">
+                    <div class="content">
+
+                        <div class="header" th:text="${info.service_name}"></div>
+                        <div th:text="${info.description}"></div>
+
+                        <p/>
+
+                        <div th:each="dns : ${info.public_dns}" class="ui tag">
+                            <div class="ui tag label" th:text="${dns}"></div>
+
+                        </div>
+
+                    </div>
+                    <div class="extra content">
+                        <div th:text="${info.techInfo}"></div>
+                    </div>
+                </div>
+
+                <div class="ui ribbon left basic label"><i class="arrow left icon"></i>Depends on</div>
+                <p/>
+
+                <h5 class="header">
+                    Internal
+                </h5>
+
+                <div class="ui basic label" th:each="connection : ${pivio.service.depends_on.internal}" th:text="${connection}"></div>
+
+                <h5 class="header">
+                    Public External
+                </h5>
+                <div class="ui card" th:each="connection : ${pivio.service.depends_on.external}">
+                    <div class="content">
+                        <div class="header" th:text="${connection.target}"></div>
+                        <div class="meta" th:text="${connection.via}"></div>
+                        <p th:text="${connection.why}"></p>
+                        <div class="ui basic label" th:text="${connection.transport_protocol}"></div>
+
+                    </div>
+                </div>
+
+
 
             </div>
+
 
         </div>
     </div>

@@ -41,6 +41,7 @@ public class Service {
                         ", why='" + why + '\'' +
                         '}';
             }
+
         }
 
         @Override
@@ -76,6 +77,11 @@ public class Service {
                     ", public_dns=" + public_dns +
                     '}';
         }
+
+        public String getTechInfo() {
+            return transport_protocol+" "+protocol+" "+" "+port;
+        }
+
     }
 
     @Override

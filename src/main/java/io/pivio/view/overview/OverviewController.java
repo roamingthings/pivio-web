@@ -21,6 +21,9 @@ public class OverviewController {
     @Autowired
     DetailService detailService;
 
+    @Autowired
+    OverviewService overviewService;
+
     @RequestMapping("/")
     public String main() {
         return "redirect:/app/overview";
@@ -30,19 +33,21 @@ public class OverviewController {
     public String overview(Model model) {
         model.addAttribute("config", serverConfig);
         model.addAttribute("pageId", "tabOverview");
+        model.addAttribute("pivioOverview", overviewService.getOverview());
         return "overview";
     }
 
-    @RequestMapping("/app/overview/detail/{id}")
-    public String detail(@PathVariable String id, Model model) {
+    @Deprecated
+    @RequestMapping("/app/overview/details/{id}")
+    public String javascriptDetails(@PathVariable String id, Model model) {
         model.addAttribute("config", serverConfig);
         model.addAttribute("pageId", "tabOverview");
         model.addAttribute("pivioDocumentId", id);
         return "detail";
     }
 
-    @RequestMapping("/app/overview/details/{id}")
-    public String details(@PathVariable String id, Model model) {
+    @RequestMapping("/app/overview/detail/{id}")
+    public String detail(@PathVariable String id, Model model) {
         model.addAttribute("config", serverConfig);
         model.addAttribute("pageId", "tabOverview");
         model.addAttribute("pivio", detailService.getDetail(id));

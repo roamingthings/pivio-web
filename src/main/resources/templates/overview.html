@@ -8,42 +8,7 @@
 <body>
 <div th:fragment="content">
 
-    <script id="card" type="text/x-handlebars-template">
-        {{#each this}}
-        <a class="ui blue card" data-meta="{{meta}}" href="/app/overview/detail/{{id}}">
-            <div class="content">
-                {{#if short_name}}
-                <div class="right floated  ui ">{{short_name}}</div>
-                {{/if}}
-                <div class="header">
-                    {{name}}
-                </div>
-                <div class="meta">
-                    {{team}}
-                </div>
-                <div class="description">
-                    {{description}}
-                </div>
-            </div>
-
-            <div class="extra content">
-                {{#if bounded_context}}
-                <div class="ui tiny label ">
-                <i class="circle thin icon"></i>{{bounded_context}}
-                </div>
-                {{/if}}
-
-                <div class="ui tiny label ">
-                    <i class="upload icon"></i>{{last_upload}} &nbsp;
-                    <i class="write icon"></i> {{last_update}}
-                </div>
-            </div>
-        </a>
-        {{/each}}
-    </script>
-
     <script src="/js/overview.js"></script>
-    <script src="/js/prettyDate.js"></script>
 
     <div class="ui container centered">
         <div class="ui icon input">
@@ -57,6 +22,31 @@
 
     <div id="cards" class="ui cards container centered grey">
 
+        <!--@thymesVar id="pivioOverview" type="java.util.List"-->
+        <!--@thymesVar id="card" type="io.pivio.view.overview.model.OverviewCard"-->
+        <a th:each="card : ${pivioOverview}" class="ui blue card"
+           data-th-attr="data-meta=${card.meta}" th:href="'/app/overview/detail/' + ${card.id}">
+            <div class="content">
+                <div th:if="${card.short_name}" th:text="${card.short_name}" class="right floated ui"></div>
+                <div class="header" th:text="${card.name}"></div>
+                <div class="meta" th:text="${card.owner}"></div>
+                <div class="description" th:text="${card.description}"></div>
+            </div>
+
+            <div class="extra content">
+                <div th:if="${card.context}" class="ui small label "> &nbsp;
+                    <i class="circle thin icon" th:text="${card.context.belongs_to_bounded_context}"></i>
+                </div>
+
+                <div class="ui small label ">
+                    <i class="upload icon" th:text="${card.getPrettyUploadDate()}"></i> &nbsp;
+                    <i class="write icon" th:text="${card.getPrettyUpdateDate()}"></i>
+                </div>
+
+            </div>
+
+
+        </a>
     </div>
 
 </div>

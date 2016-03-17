@@ -9,6 +9,7 @@ public class Runtime {
     public String cpu;
     public String disk;
     public String host_type;
+    public String network_zone;
 
     @Override
     public String toString() {
@@ -17,6 +18,7 @@ public class Runtime {
                 ", cpu='" + cpu + '\'' +
                 ", disk='" + disk + '\'' +
                 ", host_type='" + host_type + '\'' +
+                ", network_zone='" + network_zone + '\'' +
                 '}';
     }
 }

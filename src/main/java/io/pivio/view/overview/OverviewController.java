@@ -37,15 +37,6 @@ public class OverviewController {
         return "overview";
     }
 
-    @Deprecated
-    @RequestMapping("/app/overview/details/{id}")
-    public String javascriptDetails(@PathVariable String id, Model model) {
-        model.addAttribute("config", serverConfig);
-        model.addAttribute("pageId", "tabOverview");
-        model.addAttribute("pivioDocumentId", id);
-        return "detail";
-    }
-
     @RequestMapping("/app/overview/detail/{id}")
     public String detail(@PathVariable String id, Model model) {
         model.addAttribute("config", serverConfig);
@@ -53,7 +44,6 @@ public class OverviewController {
         model.addAttribute("pivio", detailService.getDetail(id));
         return "details";
     }
-
 
     @RequestMapping("/app/overview/list")
     public String similar(@RequestParam("field") String field, @RequestParam("value") String value, Model model) {

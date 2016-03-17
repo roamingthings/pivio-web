@@ -2,9 +2,12 @@ package io.pivio.view.overview.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import static java.util.Collections.*;
+import static java.util.Collections.sort;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PivioDetail {
@@ -22,7 +25,6 @@ public class PivioDetail {
     public List<String> tags = new ArrayList<>();
     public Map<String, String> links = new HashMap<>();
     public Runtime runtime;
-    public Network network;
     public Service service;
     public String created;
     public String lastUpload;
@@ -45,7 +47,6 @@ public class PivioDetail {
                 ", tags=" + tags +
                 ", links=" + links +
                 ", runtime=" + runtime +
-                ", network=" + network +
                 '}';
     }
 

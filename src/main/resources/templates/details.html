@@ -94,6 +94,14 @@
                 <div class="ui basic label"> Host
                     <div class="detail"><a th:text="${pivio.runtime.host_type}"></a></div>
                 </div>
+
+                <!--/app/overview/list?field=network_zone&amp;value={{network_zone}}-->
+                <div class="ui basic label"> Network Zone
+                    <div class="detail"><a
+                            th:href="'/app/overview/list?field=runtime.network_zone&amp;value='+${pivio.runtime.network_zone}"
+                            th:text="${pivio.runtime.network_zone}"></a></div>
+                </div>
+
             </div>
 
         </div>
@@ -118,7 +126,7 @@
 
                         <p/>
 
-                        <div th:each="dns : ${info.public_dns}" >
+                        <div th:each="dns : ${info.public_dns}">
                             <div class="ui label" th:text="${dns}"></div>
                         </div>
 
@@ -159,13 +167,19 @@
                 <div class="ui red top attached label">Software Dependencies</div>
                 <div class="ui ribbon left basic label">In Use</div>
                 <ul class="ui list" th:each="dep : ${pivio.sortedDependencies}">
-                    <li th:text="${dep.name +' : '+ dep.version+' '}"></li>
+                    <li><a th:href="'/app/overview/list?field=software_dependencies.name&amp;value='+${dep.name}"
+                           th:text="${dep.name +' : '+ dep.version+' '}"></a>
+                    </li>
                 </ul>
 
                 <p/>
+
                 <div class="ui ribbon left basic label">Licenses</div>
                 <ul class="ui list" th:each="license : ${pivio.consolidatedLicenses}">
-                    <li th:text="${license}"></li>
+                    <li><a th:href="'/app/overview/list?field=software_dependencies.licenses.name&amp;value='+${license}"
+                           th:text="${license}"></a>
+                    </li>
+
                 </ul>
 
 

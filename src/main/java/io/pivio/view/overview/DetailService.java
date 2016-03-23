@@ -59,12 +59,13 @@ class DetailService {
 
     List<UsedBy> getUsage(String serviceId, Service service, List<Connection> connections) {
         List<UsedBy> result = new ArrayList<>();
-
         List<String> offeredServices = new ArrayList<>();
 
-        for (Service.Provides provide : service.provides) {
-            offeredServices.add(serviceId + "_" + provide.port);
-            offeredServices.add(provide.service_name);
+        if (service != null && service.provides != null) {
+            for (Service.Provides provide : service.provides) {
+                offeredServices.add(serviceId + "_" + provide.port);
+                offeredServices.add(provide.service_name);
+            }
         }
 
         for (Connection connection : connections) {

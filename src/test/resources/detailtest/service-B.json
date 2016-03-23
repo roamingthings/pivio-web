@@ -1,0 +1,16 @@
+{
+  "provides": [
+    {
+      "description": "REST API",
+      "service_name": "B-rest-service",
+      "protocol": "https",
+      "port": 8443,
+      "transport_protocol": "tcp"
+    }
+  ],
+  "depends_on": {
+    "internal": [
+      "C_8443"
+    ]
+  }
+}

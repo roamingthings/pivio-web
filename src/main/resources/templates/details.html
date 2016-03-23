@@ -79,6 +79,8 @@
 
             </div>
 
+            <!--RUNTIME ===-->
+
             <div th:if="${pivio.runtime}" class="ui segment">
                 <div class="ui blue top attached label">Runtime</div>
 
@@ -108,9 +110,20 @@
 
         <!-- second column -->
         <div class="column">
+
+            <!--SERVICES ===-->
+
             <div th:if="${pivio.service}" class="ui segment">
                 <div class="ui orange top attached label">Service</div>
-                <div class="ui ribbon left basic label"><i class="arrow right icon"></i>Is used by</div>
+
+                <div th:if="${pivio.usedBy}">
+                    <div class="ui ribbon left basic label"><i class="arrow right icon"></i>Is used by</div>
+                    <p/>
+
+                    <div class="ui basic label" th:each="usedBy : ${pivio.usedBy}"
+                         th:text="${usedBy.id}"></div>
+                </div>
+
 
                 <p/>
 

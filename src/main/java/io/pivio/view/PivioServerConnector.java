@@ -33,24 +33,4 @@ public class PivioServerConnector {
         log.debug(response.getBody().toString());
         return response;
     }
-
-    public ResponseEntity getOverviewCards() throws UnsupportedEncodingException {
-        String path = "/document?fields=short_name,id,description,name,owner,context,lastUpdate,lastUpload&sort=name:asc";
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Content-Type", MediaType.APPLICATION_JSON_VALUE);
-        String url = serverConfig.apiAddress + path;
-        log.debug("Asking: " + url);
-
-        ParameterizedTypeReference<List<OverviewCard>> typeRef = new ParameterizedTypeReference<List<OverviewCard>>() {
-        };
-
-        ResponseEntity<List<OverviewCard>> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>("", headers), typeRef);
-        log.debug(response.getBody().toString());
-        return response;
-    }
-
-
-
-
 }

@@ -30,6 +30,7 @@ public class PivioDetail {
     public String lastUpload;
     public String lastUpdate;
     public List<SoftwareDependency> software_dependencies = new ArrayList<>();
+    public List<UsedBy> usedBy = new ArrayList<>();
 
     @Override
     public String toString() {

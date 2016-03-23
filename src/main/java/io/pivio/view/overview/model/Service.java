@@ -65,6 +65,7 @@ public class Service {
         public String transport_protocol;
         public String description;
         public List<String> public_dns = new ArrayList<>();
+        public List<UsedBy> usedBy = new ArrayList<>();
 
         @Override
         public String toString() {

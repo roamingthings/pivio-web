@@ -116,13 +116,13 @@
             <div th:if="${pivio.service}" class="ui segment">
                 <div class="ui orange top attached label">Service</div>
 
-                <div th:if="${pivio.usedBy}">
-                    <div class="ui ribbon left basic label"><i class="arrow right icon"></i>Is used by</div>
-                    <p/>
+                <!--<div th:if="${pivio.usedBy}">-->
+                    <!--<div class="ui ribbon left basic label"><i class="arrow right icon"></i>Is used by</div>-->
+                    <!--<p/>-->
 
-                    <div class="ui basic label" th:each="usedBy : ${pivio.usedBy}"
-                         th:text="${usedBy.id}"></div>
-                </div>
+                    <!--<div class="ui basic label" th:each="usedBy : ${pivio.usedBy}"-->
+                         <!--th:text="${usedBy.id}"></div>-->
+                <!--</div>-->
 
 
                 <p/>
@@ -134,18 +134,25 @@
                 <div th:each="info : ${pivio.service.provides}" class="ui card">
                     <div class="content">
 
-                        <div class="header" th:text="${info.service_name}"></div>
-                        <div th:text="${info.description}"></div>
+                        <div class="header" th:text="${info.description}"></div>
+                        <div class="meta">
+                            <span class="date" th:text="${info.techInfo}"></span>
+                        </div>
 
                         <p/>
 
                         <div th:each="dns : ${info.public_dns}">
-                            <div class="ui label" th:text="${dns}"></div>
+                            Public DNS: <div class="ui label" th:text="${dns}"></div>
                         </div>
+
+                        Used By:
+
+                        <a th:href="'/app/overview/detail/'+${usedBy.id}" class="ui orange label" th:each="usedBy : ${info.usedBy}" th:text="${usedBy.id}"></a>
 
                     </div>
                     <div class="extra content">
-                        <div th:text="${info.techInfo}"></div>
+                         <div class="ui tiny label" th:text="${info.service_name}"></div>
+
                     </div>
                 </div>
 
@@ -160,7 +167,7 @@
                     <div class="ui basic label" th:each="connection : ${pivio.service.depends_on.internal}"
                          th:text="${connection}"></div>
 
-                    <h5 class="header">
+                    <h5 th:if="${not #lists.isEmpty(pivio.service.depends_on.external)}" class="header">
                         Public External
                     </h5>
 

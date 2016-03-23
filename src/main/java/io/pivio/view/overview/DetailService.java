@@ -35,7 +35,7 @@ class DetailService {
         try {
             ResponseEntity pivioDetail = pivioServerConnector.query("document/", id, PivioDetail.class);
             PivioDetail detail = (PivioDetail) pivioDetail.getBody();
-            detail.usedBy = getUsage(id, detail.service, getConnections());
+            detail.setUsedBy(getUsage(detail.short_name, detail.service, getConnections()));
             return detail;
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -57,13 +57,13 @@ class DetailService {
         return response.getBody();
     }
 
-    List<UsedBy> getUsage(String serviceId, Service service, List<Connection> connections) {
+    List<UsedBy> getUsage(String serviceShortName, Service service, List<Connection> connections) {
         List<UsedBy> result = new ArrayList<>();
         List<String> offeredServices = new ArrayList<>();
 
         if (service != null && service.provides != null) {
             for (Service.Provides provide : service.provides) {
-                offeredServices.add(serviceId + "_" + provide.port);
+                offeredServices.add(serviceShortName + "_" + provide.port);
                 offeredServices.add(provide.service_name);
             }
         }

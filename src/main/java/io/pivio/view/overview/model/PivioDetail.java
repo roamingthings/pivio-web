@@ -30,25 +30,23 @@ public class PivioDetail {
     public String lastUpload;
     public String lastUpdate;
     public List<SoftwareDependency> software_dependencies = new ArrayList<>();
-    public List<UsedBy> usedBy = new ArrayList<>();
+    private List<UsedBy> usedBy = new ArrayList<>();
 
-    @Override
-    public String toString() {
-        return "PivioDetail{" +
-                "id='" + id + '\'' +
-                ", owner='" + owner + '\'' +
-                ", short_name='" + short_name + '\'' +
-                ", name='" + name + '\'' +
-                ", status='" + status + '\'' +
-                ", vcs='" + vcs + '\'' +
-                ", description='" + description + '\'' +
-                ", type='" + type + '\'' +
-                ", contact='" + contact + '\'' +
-                ", context=" + context +
-                ", tags=" + tags +
-                ", links=" + links +
-                ", runtime=" + runtime +
-                '}';
+    public void setUsedBy(List<UsedBy> usedBy) {
+        this.usedBy = usedBy;
+        if (service != null && service.provides != null) {
+            for (Service.Provides providedService : service.provides) {
+                for (UsedBy by : usedBy) {
+                    if (by.connectionId.equals(providedService.service_name) || by.connectionId.equals(short_name+"_"+providedService.port)) {
+                        providedService.usedBy.add(by);
+                    }
+                }
+            }
+        }
+    }
+
+    public List<UsedBy> getUsedBy() {
+        return usedBy;
     }
 
     public List getConsolidatedLicenses() {
@@ -67,5 +65,24 @@ public class PivioDetail {
     public List<SoftwareDependency> getSortedDependencies() {
         sort(software_dependencies);
         return software_dependencies;
+    }
+
+    @Override
+    public String toString() {
+        return "PivioDetail{" +
+                "id='" + id + '\'' +
+                ", owner='" + owner + '\'' +
+                ", short_name='" + short_name + '\'' +
+                ", name='" + name + '\'' +
+                ", status='" + status + '\'' +
+                ", vcs='" + vcs + '\'' +
+                ", description='" + description + '\'' +
+                ", type='" + type + '\'' +
+                ", contact='" + contact + '\'' +
+                ", context=" + context +
+                ", tags=" + tags +
+                ", links=" + links +
+                ", runtime=" + runtime +
+                '}';
     }
 }

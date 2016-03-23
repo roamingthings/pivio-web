@@ -12,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -43,12 +42,14 @@ public class PivioServerConnector {
         String url = serverConfig.apiAddress + path;
         log.debug("Asking: " + url);
 
-        ParameterizedTypeReference<List<OverviewCard>> typeRef = new ParameterizedTypeReference<List<OverviewCard>>() {};
+        ParameterizedTypeReference<List<OverviewCard>> typeRef = new ParameterizedTypeReference<List<OverviewCard>>() {
+        };
 
         ResponseEntity<List<OverviewCard>> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>("", headers), typeRef);
         log.debug(response.getBody().toString());
         return response;
     }
+
 
 
 

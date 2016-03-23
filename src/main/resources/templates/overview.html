@@ -35,12 +35,12 @@
 
             <div class="extra content">
                 <div th:if="${card.context}" class="ui small label "> &nbsp;
-                    <i class="circle thin icon" th:text="${card.context.belongs_to_bounded_context}"></i>
+                    <i class="circle thin icon"></i> <span th:text="${card.context.belongs_to_bounded_context}"></span>
                 </div>
 
                 <div class="ui small label ">
-                    <i class="upload icon" th:text="${card.getPrettyUploadDate()}"></i> &nbsp;
-                    <i class="write icon" th:text="${card.getPrettyUpdateDate()}"></i>
+                    <i class="upload icon"></i> <span th:text="${card.getPrettyUploadDate()}"></span> &nbsp;
+                    <i class="write icon"></i> <span th:text="${card.getPrettyUpdateDate()}"></span>
                 </div>
 
             </div>

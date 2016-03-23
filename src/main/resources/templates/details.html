@@ -73,8 +73,8 @@
                 </div>
 
                 <div class="ui tiny label ">
-                    <i class="upload icon" th:text="${pivio.lastUpload}"></i> &nbsp;
-                    <i class="write icon" th:text="${pivio.lastUpdate}"></i>
+                    <i class="upload icon"></i><span th:text="${pivio.lastUpload}"></span> &nbsp;
+                    <i class="write icon"></i> <span th:text="${pivio.lastUpdate}"></span>
                 </div>
 
             </div>
@@ -136,27 +136,30 @@
                     </div>
                 </div>
 
-                <div class="ui ribbon left basic label"><i class="arrow left icon"></i>Depends on</div>
-                <p/>
+                <div th:if="${pivio.service.depends_on}">
+                    <div class="ui ribbon left basic label"><i class="arrow left icon"></i>Depends on</div>
+                    <p/>
 
-                <h5 class="header">
-                    Internal
-                </h5>
+                    <h5 class="header">
+                        Internal
+                    </h5>
 
-                <div class="ui basic label" th:each="connection : ${pivio.service.depends_on.internal}"
-                     th:text="${connection}"></div>
+                    <div class="ui basic label" th:each="connection : ${pivio.service.depends_on.internal}"
+                         th:text="${connection}"></div>
 
-                <h5 class="header">
-                    Public External
-                </h5>
+                    <h5 class="header">
+                        Public External
+                    </h5>
 
-                <div class="ui card" th:each="connection : ${pivio.service.depends_on.external}">
-                    <div class="content">
-                        <div class="header" th:text="${connection.target}"></div>
-                        <div class="meta" th:text="${connection.via}"></div>
-                        <p th:text="${connection.why}"></p>
+                    <div th:if="${pivio.service.depends_on}" class="ui card"
+                         th:each="connection : ${pivio.service.depends_on.external}">
+                        <div class="content">
+                            <div class="header" th:text="${connection.target}"></div>
+                            <div class="meta" th:text="${connection.via}"></div>
+                            <p th:text="${connection.why}"></p>
 
-                        <div class="ui basic label" th:text="${connection.transport_protocol}"></div>
+                            <div class="ui basic label" th:text="${connection.transport_protocol}"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -176,7 +179,8 @@
 
                 <div class="ui ribbon left basic label">Licenses</div>
                 <ul class="ui list" th:each="license : ${pivio.consolidatedLicenses}">
-                    <li><a th:href="'/app/overview/list?field=software_dependencies.licenses.name&amp;value='+${license}"
+                    <li>
+                        <a th:href="'/app/overview/list?field=software_dependencies.licenses.name&amp;value='+${license}"
                            th:text="${license}"></a>
                     </li>
 

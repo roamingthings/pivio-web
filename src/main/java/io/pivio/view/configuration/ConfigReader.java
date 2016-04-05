@@ -2,6 +2,8 @@ package io.pivio.view.configuration;
 
 import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,7 @@ import java.util.Map;
 @Component
 public class ConfigReader {
 
+    private final Logger log = LoggerFactory.getLogger(ConfigReader.class);
 
     @Value(value = "${config}")
     String configFile;
@@ -37,6 +40,8 @@ public class ConfigReader {
             if (pivioServer != null) {
                 serverConfig.apiAddress = pivioServer;
             }
+
+            log.info("Using config: ", serverConfig.toString());
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

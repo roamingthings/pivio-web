@@ -42,7 +42,7 @@ public class OverviewController {
         model.addAttribute("config", serverConfig);
         model.addAttribute("pageId", "tabOverview");
         model.addAttribute("pivio", detailService.getDetail(id));
-        return "details";
+        return "detail";
     }
 
     @RequestMapping("/app/overview/list")

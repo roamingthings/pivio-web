@@ -14,31 +14,26 @@
 
     <script id="feed-template" type="text/x-handlebars-template">
 
-        <table class="ui celled striped table">
-            <thead>
-            <tr>
-                <th>Who</th>
-                <th>What</th>
-                <th>From</th>
-                <th>To</th>
-                <th>When?</th>
-            </tr>
-            </thead>
-            <tbody>
             {{#each this}}
-            <tr>
-                <td class="collapsing">{{document}}</td>
-                <td>{{field}}</td>
-                <td>{{previous}}</td>
-                <td>{{current}}</td>
-                <td class="right aligned collapsing">{{date}}</td>
-            </tr>
+
+
+            <div class="ui card" style="width: 100%">
+                <div class="content" style="width: 100%">
+                    <div class="header">{{document}}</div>
+                    <div class="meta">
+                        <span class="right floated time">{{date}}</span>
+                        <span class="category">{{field}}</span>
+                    </div>
+                    <div class="content description">
+                        <b>From: </b><p><s>{{previous}}</s></p>
+                        <b>To: </b><p>{{current}}</p>
+                    </div>
+                </div>
+
+            </div>
+
             {{/each}}
-            </tbody>
-        </table>
 
-
-        <div>{{date}} {{document}} {{field}} {{previous}} {{current}}</div>
     </script>
 
 

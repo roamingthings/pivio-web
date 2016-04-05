@@ -1,9 +1,5 @@
 $(function () {
-
     var url = `${apiserver}/changeset`;
-
-    console.log(url)
-
     var feed = [];
 
     $.ajax({
@@ -16,7 +12,6 @@ $(function () {
 
             for (var i = 0; i < documents.length; i++) {
                 var d = documents[i];
-                console.log(d);
                 for (var j = 0; j < d.fields.length; j++) {
                     var entry = {
                         date: prettyDate(d.timestamp),

@@ -3,11 +3,15 @@ package io.pivio.view.overview.model;
 public class Connection {
 
     public String id;
-    public Service service;
     public String short_name;
+    public String connectionId;
 
-    public boolean hasDependencies() {
-        return service != null && service.depends_on != null;
+    public Connection() {
     }
 
+    public Connection(String id, String connectionId, String short_name) {
+        this.id = id;
+        this.connectionId = connectionId;
+        this.short_name = short_name;
+    }
 }

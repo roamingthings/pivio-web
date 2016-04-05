@@ -30,23 +30,21 @@ public class PivioDetail {
     public String lastUpload;
     public String lastUpdate;
     public List<SoftwareDependency> software_dependencies = new ArrayList<>();
-    private List<UsedBy> usedBy = new ArrayList<>();
 
-    public void setUsedBy(List<UsedBy> usedBy) {
-        this.usedBy = usedBy;
+    public void setUsedBy(List<Connection> connection) {
         if (service != null && service.provides != null) {
             for (Service.Provides providedService : service.provides) {
-                for (UsedBy by : usedBy) {
+                for (Connection by : connection) {
                     if (by.connectionId.equals(providedService.service_name) || by.connectionId.equals(short_name+"_"+providedService.port)) {
-                        providedService.usedBy.add(by);
+                        providedService.connection.add(by);
                     }
                 }
             }
         }
     }
 
-    public List<UsedBy> getUsedBy() {
-        return usedBy;
+    public void setInternalDependencies() {
+
     }
 
     public List getConsolidatedLicenses() {

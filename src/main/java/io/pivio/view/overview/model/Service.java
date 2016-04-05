@@ -20,7 +20,6 @@ public class Service {
         public List<String> internal = new ArrayList<>();
         public List<External> external = new ArrayList<>();
 
-
         @JsonIgnoreProperties(ignoreUnknown = true)
         public static class External {
 
@@ -59,13 +58,13 @@ public class Service {
         public Provides() {
         }
 
-        public String protocol;
-        public String port;
-        public String service_name;
-        public String transport_protocol;
-        public String description;
+        public String protocol = "";
+        public String port = "";
+        public String service_name = "";
+        public String transport_protocol = "";
+        public String description = "";
         public List<String> public_dns = new ArrayList<>();
-        public List<UsedBy> usedBy = new ArrayList<>();
+        public List<Connection> connection = new ArrayList<>();
 
         @Override
         public String toString() {

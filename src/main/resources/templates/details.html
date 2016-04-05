@@ -23,7 +23,7 @@
 
                 <div class="ui  basic label">
                     <i class="users icon"></i> Owner
-                    <div th:text="${pivio.owner}" class="detail"></div>
+                    <a th:href="'/app/overview/list?field=owner&amp;value='+${pivio.owner}" th:text="${pivio.owner}" class="detail"></a>
                 </div>
 
                 <div th:if="${pivio.status}" class="ui basic label">
@@ -44,12 +44,12 @@
                 <div th:if="${pivio.context}">
                     <div th:if="${pivio.context.belongs_to_bounded_context}" class="ui basic label">
                         <i class="circle thin icon"></i> Context
-                        <div class="detail"><a th:text="${pivio.context.belongs_to_bounded_context}"></a></div>
+                        <div class="detail"><a th:href="'/app/overview/list?field=context.belongs_to_bounded_context&amp;value='+${pivio.context.belongs_to_bounded_context}" th:text="${pivio.context.belongs_to_bounded_context}"></a></div>
                     </div>
 
                     <div th:if="${pivio.context.visibility}" class="ui basic label">
                         <i class="circle thin icon"></i> Intended usage:
-                        <div class="detail"><a th:text="${pivio.context.visibility}"></a></div>
+                        <div class="detail"><a th:href="'/app/overview/list?field=context.visibility&amp;value='+${pivio.context.visibility}" th:text="${pivio.context.visibility}"></a></div>
                     </div>
                 </div>
 
@@ -97,7 +97,6 @@
                     <div class="detail"><a th:text="${pivio.runtime.host_type}"></a></div>
                 </div>
 
-                <!--/app/overview/list?field=network_zone&amp;value={{network_zone}}-->
                 <div class="ui basic label"> Network Zone
                     <div class="detail"><a
                             th:href="'/app/overview/list?field=runtime.network_zone&amp;value='+${pivio.runtime.network_zone}"
@@ -115,15 +114,6 @@
 
             <div th:if="${pivio.service}" class="ui segment">
                 <div class="ui orange top attached label">Service</div>
-
-                <!--<div th:if="${pivio.usedBy}">-->
-                    <!--<div class="ui ribbon left basic label"><i class="arrow right icon"></i>Is used by</div>-->
-                    <!--<p/>-->
-
-                    <!--<div class="ui basic label" th:each="usedBy : ${pivio.usedBy}"-->
-                         <!--th:text="${usedBy.id}"></div>-->
-                <!--</div>-->
-
 
                 <p/>
 
@@ -147,7 +137,7 @@
 
                         Used By:
 
-                        <a th:href="'/app/overview/detail/'+${usedBy.id}" class="ui orange label" th:each="usedBy : ${info.usedBy}" th:text="${usedBy.id}"></a>
+                        <a th:href="'/app/overview/detail/'+${usedBy.id}" class="ui orange label" th:each="usedBy : ${info.connection}" th:text="${usedBy.short_name}"></a>
 
                     </div>
                     <div class="extra content">

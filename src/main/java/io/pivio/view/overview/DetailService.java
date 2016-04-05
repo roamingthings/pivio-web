@@ -2,10 +2,7 @@ package io.pivio.view.overview;
 
 import io.pivio.view.PivioServerConnector;
 import io.pivio.view.configuration.ServerConfig;
-import io.pivio.view.overview.model.Connection;
-import io.pivio.view.overview.model.PivioDetail;
-import io.pivio.view.overview.model.Service;
-import io.pivio.view.overview.model.UsedBy;
+import io.pivio.view.overview.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +13,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Component
@@ -35,7 +34,8 @@ class DetailService {
         try {
             ResponseEntity pivioDetail = pivioServerConnector.query("document/", id, PivioDetail.class);
             PivioDetail detail = (PivioDetail) pivioDetail.getBody();
-            detail.setUsedBy(getUsage(detail.short_name, detail.service, getConnections()));
+            List<ServiceIdShortName> serviceIdShortNames = getConnections();
+            detail.setUsedBy(getUsage(detail.short_name, detail.service, serviceIdShortNames));
             return detail;
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -43,22 +43,22 @@ class DetailService {
         return result;
     }
 
-    private List<Connection> getConnections() {
+    private List<ServiceIdShortName> getConnections() {
         String path = "/document?fields=short_name,id,service";
         String url = serverConfig.apiAddress + path;
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", MediaType.APPLICATION_JSON_VALUE);
         log.debug("Asking: " + url);
-        ParameterizedTypeReference<List<Connection>> typeRef = new ParameterizedTypeReference<List<Connection>>() {
+        ParameterizedTypeReference<List<ServiceIdShortName>> typeRef = new ParameterizedTypeReference<List<ServiceIdShortName>>() {
         };
-        ResponseEntity<List<Connection>> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>("", headers), typeRef);
+        ResponseEntity<List<ServiceIdShortName>> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>("", headers), typeRef);
         log.debug(response.getBody().toString());
         return response.getBody();
     }
 
-    List<UsedBy> getUsage(String serviceShortName, Service service, List<Connection> connections) {
-        List<UsedBy> result = new ArrayList<>();
+    List<Connection> getUsage(String serviceShortName, Service service, List<ServiceIdShortName> serviceIdShortNames) {
+        List<Connection> result = new ArrayList<>();
         List<String> offeredServices = new ArrayList<>();
 
         if (service != null && service.provides != null) {
@@ -68,15 +68,17 @@ class DetailService {
             }
         }
 
-        for (Connection connection : connections) {
-            if (connection.hasDependencies()) {
-                for (String dependsOn : connection.service.depends_on.internal) {
+        for (ServiceIdShortName serviceIdShortName : serviceIdShortNames) {
+            if (serviceIdShortName.hasDependencies()) {
+                for (String dependsOn : serviceIdShortName.service.depends_on.internal) {
                     if (offeredServices.contains(dependsOn)) {
-                        result.add(new UsedBy(connection.id, dependsOn));
+                        result.add(new Connection(serviceIdShortName.id, dependsOn, serviceIdShortName.short_name));
                     }
                 }
             }
         }
         return result;
     }
+
+
 }

@@ -1,9 +1,7 @@
-$(function () {
+function list(field, value) {
 
     var searchQuery = encodeURI(`{"match":{"${field}":"'${value}'"}}`),
         url = `${apiserver_js}/document?query=${searchQuery}&fields=id,name`;
-
-    console.log(url);
 
     $.ajax({
         url: url,
@@ -18,4 +16,4 @@ $(function () {
         }
     });
 
-});
+};

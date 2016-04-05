@@ -8,14 +8,15 @@
 <body>
 <div th:fragment="content">
 
+    <script src="/js/list.js"></script>
     <script th:inline="javascript">
         /*<![CDATA[*/
         var field = /*[[${field}]]*/ '';
         var value = /*[[${value}]]*/ '';
         /*]]>*/
+        list(field, value);
     </script>
 
-    <script src="/js/list.js"></script>
 
 
     <script id="list-template" type="text/x-handlebars-template">

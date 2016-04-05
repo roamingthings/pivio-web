@@ -32,6 +32,12 @@ public class ConfigReader {
             if (objectMap.containsKey("api")) {
                 serverConfig.apiAddress = (String) objectMap.get("api");
             }
+
+            String pivioServer = System.getenv("PIVIO_SERVER");
+            if (pivioServer != null) {
+                serverConfig.apiAddress = pivioServer;
+            }
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {

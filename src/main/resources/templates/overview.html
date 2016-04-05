@@ -27,7 +27,7 @@
         <a th:each="card : ${pivioOverview}" class="ui blue card"
            data-th-attr="data-meta=${card.meta}" th:href="'/app/overview/detail/' + ${card.id}">
             <div class="content">
-                <div th:if="${card.short_name}" th:text="${card.short_name}" class="right floated ui"></div>
+                <div th:if="${card.short_name}" th:text="${card.short_name}" class="right floated ui button blue tiny"></div>
                 <div class="header" th:text="${card.name}"></div>
                 <div class="meta" th:text="${card.owner}"></div>
                 <div class="description" th:text="${card.description}"></div>

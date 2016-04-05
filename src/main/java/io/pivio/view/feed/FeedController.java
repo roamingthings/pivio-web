@@ -12,10 +12,14 @@ public class FeedController {
     @Autowired
     ServerConfig serverConfig;
 
+    @Autowired
+    FeedService feedService;
+
     @RequestMapping(value = "/app/feed")
     public String overview(Model model) {
         model.addAttribute("config", serverConfig);
         model.addAttribute("pageId", "tabFeed");
+        model.addAttribute("changeset", feedService.getChangeset());
         return "feed";
     }
 }

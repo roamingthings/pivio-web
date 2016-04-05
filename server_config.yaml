@@ -1,14 +1,14 @@
 api: http://localhost:9123/
 pages:
   - description: Overview
-    url: http://localhost:8080/app/overview
+    url: /app/overview
     id: tabOverview
   - description: Query
-    url: http://localhost:8080/app/query
+    url: /app/query
     id: tabQuery
 #  - description: Service Graph
-#    url: http://localhost:8080/app/servicegraph
+#    url: /app/servicegraph
 #    id: tabServiceGraph
   - description: Feed
-    url: http://localhost:8080/app/feed
+    url: /app/feed
     id: tabFeed

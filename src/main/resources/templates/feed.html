@@ -8,38 +8,29 @@
 <body>
 <div th:fragment="content">
 
-    <script src="/js/feed.js"></script>
-    <script src="/js/prettyDate.js"></script>
-
-
-    <script id="feed-template" type="text/x-handlebars-template">
-
-            {{#each this}}
-
-
-            <div class="ui card" style="width: 100%">
-                <div class="content" style="width: 100%">
-                    <div class="header">{{document}}</div>
-                    <div class="meta">
-                        <span class="right floated time">{{date}}</span>
-                        <span class="category">{{field}}</span>
-                    </div>
-                    <div class="content description">
-                        <b>From: </b><p><s>{{previous}}</s></p>
-                        <b>To: </b><p>{{current}}</p>
-                    </div>
-                </div>
-
+    <div th:each="feeditem: ${changeset}" class="ui card" style="width: 100%">
+        <div class="content" style="width: 100%">
+            <!--@thymesVar id="feeditem" type="io.pivio.view.feed.model.FeedItem"-->
+            <div class="ui blue header" th:text="${feeditem.document}"></div>
+            <div class="meta">
+                <span class="right floated time" th:text="${feeditem.getPrettyDate()}"></span>
             </div>
 
-            {{/each}}
+            <div class="content description" th:each="field: ${feeditem.fields}">
+                <div class="ui grey tiny label" th:text="${field.field}"></div>
+                <p/>
+                <b>From: </b>
 
-    </script>
+                <p><s th:text="${field.previous}">???</s></p>
+                <b>To: </b>
 
-
-    <div id="feed">
+                <p th:text="${field.current}">???</p>
+                <div class="ui clearing divider"></div>
+            </div>
+        </div>
 
     </div>
+
 
 </div>
 </body>

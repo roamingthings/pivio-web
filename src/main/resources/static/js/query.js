@@ -15,7 +15,7 @@ $(function () {
         if (queryInput != "") {
             query = query + "&query=" + queryInput;
         }
-        var url = apiserver + "/document" + encodeURI(query);
+        var url = apiserver_js + "/document" + encodeURI(query);
 
         $.ajax({
             url: url,

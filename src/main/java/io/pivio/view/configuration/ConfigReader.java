@@ -41,6 +41,11 @@ public class ConfigReader {
                 serverConfig.apiAddress = pivioServer;
             }
 
+            String pivioServerJS = System.getenv("PIVIO_SERVER_JS");
+            if (pivioServerJS != null) {
+                serverConfig.jsApiAddress = pivioServerJS;
+            }
+
             log.info("Using config: ", serverConfig.toString());
 
         } catch (FileNotFoundException e) {

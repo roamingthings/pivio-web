@@ -1,6 +1,6 @@
 $(function () {
 
-    d3.json(apiserver + "/document?query=" + encodeURI('{"match":{"type":"service"}}'), function (error, raw) {
+    d3.json(apiserver_js + "/document?query=" + encodeURI('{"match":{"type":"service"}}'), function (error, raw) {
         // from http://bl.ocks.org/mbostock/7607999
 
         var dependencies = [];

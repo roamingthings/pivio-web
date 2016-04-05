@@ -1,7 +1,7 @@
 $(function () {
 
     var searchQuery = encodeURI(`{"match":{"${field}":"'${value}'"}}`),
-        url = `${apiserver}/document?query=${searchQuery}&fields=id,name`;
+        url = `${apiserver_js}/document?query=${searchQuery}&fields=id,name`;
 
     console.log(url);
 

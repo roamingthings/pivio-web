@@ -46,7 +46,7 @@ public class ConfigReader {
                 serverConfig.jsApiAddress = pivioServerJS;
             }
 
-            log.info("Using config: ", serverConfig.toString());
+            log.info("Using config: " + serverConfig.toString());
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

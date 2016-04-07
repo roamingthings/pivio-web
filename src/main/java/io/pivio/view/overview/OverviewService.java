@@ -11,7 +11,10 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
 import java.util.List;
+
+import static java.util.Collections.sort;
 
 @Component
 public class OverviewService {
@@ -34,7 +37,10 @@ public class OverviewService {
         };
         ResponseEntity<List<OverviewCard>> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>("", headers), typeRef);
         log.debug(response.getBody().toString());
-        return response.getBody();
+
+        List<OverviewCard> result = response.getBody();
+        sort(result);
+        return result;
     }
 
     private HttpHeaders getHeaders() {

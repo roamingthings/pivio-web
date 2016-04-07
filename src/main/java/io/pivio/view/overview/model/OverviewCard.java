@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 import org.ocpsoft.prettytime.PrettyTime;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class OverviewCard {
+public class OverviewCard implements Comparable {
 
     public String name;
     public String short_name;
@@ -33,6 +33,8 @@ public class OverviewCard {
     }
 
 
+
+
     @Override
     public String toString() {
         return "Overview{" +
@@ -45,5 +47,10 @@ public class OverviewCard {
                 ", id='" + id + '\'' +
                 ", owner='" + owner + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.name.compareTo(((OverviewCard)o).name);
     }
 }

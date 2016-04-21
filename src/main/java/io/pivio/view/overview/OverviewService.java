@@ -11,7 +11,8 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Collections.sort;
@@ -27,7 +28,7 @@ public class OverviewService {
 
     private final Logger log = LoggerFactory.getLogger(OverviewService.class);
 
-    List<OverviewCard> getOverview() {
+    List<OverviewCard> getOverview() throws IOException {
         String path = "/document?fields=short_name,id,description,name,owner,context,lastUpdate,lastUpload&sort=name:asc";
         String url = serverConfig.apiAddress + path;
         RestTemplate restTemplate = new RestTemplate();
@@ -35,11 +36,15 @@ public class OverviewService {
         log.debug("Asking: " + url);
         ParameterizedTypeReference<List<OverviewCard>> typeRef = new ParameterizedTypeReference<List<OverviewCard>>() {
         };
-        ResponseEntity<List<OverviewCard>> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>("", headers), typeRef);
-        log.debug(response.getBody().toString());
-
-        List<OverviewCard> result = response.getBody();
-        sort(result);
+        List<OverviewCard> result = new ArrayList<>();
+        try {
+            ResponseEntity<List<OverviewCard>> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>("", headers), typeRef);
+            log.debug(response.getBody().toString());
+            result = response.getBody();
+            sort(result);
+        } catch (Exception e) {
+            throw new IOException();
+        }
         return result;
     }
 
@@ -47,5 +52,18 @@ public class OverviewService {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", MediaType.APPLICATION_JSON_VALUE);
         return headers;
+    }
+
+    boolean deleteDocument(String id) throws IOException {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = getHeaders();
+        String url = serverConfig.apiAddress + "/document/" + id;
+        ResponseEntity<Object> exchange = null;
+        try {
+            exchange = restTemplate.exchange(url, HttpMethod.DELETE, new HttpEntity<>("", headers), Object.class);
+        } catch (Exception e) {
+            throw new IOException();
+        }
+        return exchange != null && exchange.getStatusCode() == HttpStatus.ACCEPTED;
     }
 }

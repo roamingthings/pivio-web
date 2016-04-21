@@ -17,13 +17,14 @@
                 <div class="ui teal top attached label">General</div>
                 <div class="ui  basic ribbon label">Description</div>
 
-                <h1 th:text="${pivio.name +' ('+ pivio.short_name+')'}" class="ui header"></h1>
+                <h1 th:text="${pivio.name + ' ' +pivio.getShortName()}" class="ui header"></h1>
 
                 <p th:text="${pivio.description}"></p>
 
                 <div class="ui  basic label">
                     <i class="users icon"></i> Owner
-                    <a th:href="'/app/overview/list?field=owner&amp;value='+${pivio.owner}" th:text="${pivio.owner}" class="detail"></a>
+                    <a th:href="'/app/overview/list?field=owner&amp;value='+${pivio.owner}" th:text="${pivio.owner}"
+                       class="detail"></a>
                 </div>
 
                 <div th:if="${pivio.status}" class="ui basic label">
@@ -44,12 +45,16 @@
                 <div th:if="${pivio.context}">
                     <div th:if="${pivio.context.belongs_to_bounded_context}" class="ui basic label">
                         <i class="circle thin icon"></i> Context
-                        <div class="detail"><a th:href="'/app/overview/list?field=context.belongs_to_bounded_context&amp;value='+${pivio.context.belongs_to_bounded_context}" th:text="${pivio.context.belongs_to_bounded_context}"></a></div>
+                        <div class="detail"><a
+                                th:href="'/app/overview/list?field=context.belongs_to_bounded_context&amp;value='+${pivio.context.belongs_to_bounded_context}"
+                                th:text="${pivio.context.belongs_to_bounded_context}"></a></div>
                     </div>
 
                     <div th:if="${pivio.context.visibility}" class="ui basic label">
                         <i class="circle thin icon"></i> Intended usage:
-                        <div class="detail"><a th:href="'/app/overview/list?field=context.visibility&amp;value='+${pivio.context.visibility}" th:text="${pivio.context.visibility}"></a></div>
+                        <div class="detail"><a
+                                th:href="'/app/overview/list?field=context.visibility&amp;value='+${pivio.context.visibility}"
+                                th:text="${pivio.context.visibility}"></a></div>
                     </div>
                 </div>
 
@@ -132,16 +137,19 @@
                         <p/>
 
                         <div th:each="dns : ${info.public_dns}">
-                            Public DNS: <div class="ui label" th:text="${dns}"></div>
+                            Public DNS:
+                            <div class="ui label" th:text="${dns}"></div>
                         </div>
 
                         Used By:
 
-                        <a th:href="'/app/overview/detail/'+${usedBy.id}" class="ui orange label" th:each="usedBy : ${info.connection}" th:text="${usedBy.short_name}"></a>
+                        <a th:href="'/app/overview
+                        /'+${usedBy.id}" class="ui orange label"
+                           th:each="usedBy : ${info.connection}" th:text="${usedBy.short_name}"></a>
 
                     </div>
                     <div class="extra content">
-                         <div class="ui tiny label" th:text="${info.service_name}"></div>
+                        <div class="ui tiny label" th:text="${info.service_name}"></div>
 
                     </div>
                 </div>
@@ -154,7 +162,8 @@
                         Internal
                     </h5>
 
-                    <div th:if="${pivio.service.depends_on}" class="ui basic label" th:each="connection : ${pivio.service.depends_on.internal}"
+                    <div th:if="${pivio.service.depends_on}" class="ui basic label"
+                         th:each="connection : ${pivio.service.depends_on.internal}"
                          th:text="${connection}"></div>
 
                     <h5 th:if="${not #lists.isEmpty(pivio.service.depends_on.external)}" class="header">
@@ -201,6 +210,16 @@
 
         </div>
     </div>
+    <div class="ui one column grid">
+        <h4 class="ui horizontal divider header">
+            Actions
+        </h4>
+    <button class="negative ui right floated button">
+        <i class="ban icon"></i>
+        <a th:href="'/app/overview/'+${pivio.id}+'/delete'" rel="nofollow">Delete Document</a>
+    </button>
+    </div>
+
 </div>
 </body>
 </html>

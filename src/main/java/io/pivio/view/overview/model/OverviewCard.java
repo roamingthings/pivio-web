@@ -32,9 +32,6 @@ public class OverviewCard implements Comparable {
         return new PrettyTime().format(new DateTime(lastUpdate).toDate());
     }
 
-
-
-
     @Override
     public String toString() {
         return "Overview{" +

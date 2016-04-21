@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="page">
+<html xmlns="http://www.w3.org/1999/xhtml" th:fragment="page" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Pivio View</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -35,6 +35,15 @@
         </script>
 
     </div>
+
+    <div th:if="${pivioMessage}" class="ui success message">
+        <div th:text="${pivioMessage}" class="header"></div>
+    </div>
+
+    <div th:if="${pivioErrorMessage}" class="ui negative message">
+        <div th:text="${pivioErrorMessage}" class="header"></div>
+    </div>
+
     <div class="ui segment" th:include="this :: content">
 
     </div>

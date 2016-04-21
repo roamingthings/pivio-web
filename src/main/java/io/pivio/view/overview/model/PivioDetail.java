@@ -56,6 +56,10 @@ public class PivioDetail {
         return result;
     }
 
+    public String getShortName() {
+        return short_name != null ? "(" + short_name + ")" : "";
+    }
+
     public List<SoftwareDependency> getSortedDependencies() {
         sort(software_dependencies);
         return software_dependencies;

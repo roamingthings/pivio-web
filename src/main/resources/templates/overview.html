@@ -25,7 +25,7 @@
         <!--@thymesVar id="pivioOverview" type="java.util.List"-->
         <!--@thymesVar id="card" type="io.pivio.view.overview.model.OverviewCard"-->
         <a th:each="card : ${pivioOverview}" class="ui blue card"
-           data-th-attr="data-meta=${card.meta}" th:href="'/app/overview/detail/' + ${card.id}">
+           data-th-attr="data-meta=${card.meta}" th:href="'/app/overview/' + ${card.id}">
             <div class="content">
                 <div th:if="${card.short_name}" th:text="${card.short_name}" class="right floated ui button blue tiny"></div>
                 <div class="header" th:text="${card.name}"></div>

@@ -10,7 +10,10 @@
   ],
   "depends_on": {
     "internal": [
-      "C_8443"
+      {
+        "short_name":"C",
+        "port":"8443"
+      }
     ]
   }
 }

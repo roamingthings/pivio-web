@@ -12,8 +12,13 @@
       ],
       "depends_on": {
         "internal": [
-          "B-rest-service",
-          "C_8443"
+          {
+            "short_name":"C",
+            "port":"8443"
+          },
+          {
+            "service_name":"B-rest-service"
+          }
         ]
       }
     },
@@ -33,7 +38,10 @@
       ],
       "depends_on": {
         "internal": [
-          "C_8443"
+          {
+            "short_name":"C",
+            "port":"8443"
+          }
         ]
       }
     },

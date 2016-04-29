@@ -2,7 +2,10 @@ package io.pivio.view.overview;
 
 import io.pivio.view.PivioServerConnector;
 import io.pivio.view.configuration.ServerConfig;
-import io.pivio.view.overview.model.*;
+import io.pivio.view.overview.model.Connection;
+import io.pivio.view.overview.model.PivioDetail;
+import io.pivio.view.overview.model.Service;
+import io.pivio.view.overview.model.ServiceIdShortName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Component
@@ -57,22 +58,23 @@ class DetailService {
         return response.getBody();
     }
 
-    List<Connection> getUsage(String serviceShortName, Service service, List<ServiceIdShortName> serviceIdShortNames) {
+    List<Connection> getUsage(String serviceName, Service serviceDefinition, List<ServiceIdShortName> allServices) {
         List<Connection> result = new ArrayList<>();
         List<String> offeredServices = new ArrayList<>();
 
-        if (service != null && service.provides != null) {
-            for (Service.Provides provide : service.provides) {
-                offeredServices.add(serviceShortName + "_" + provide.port);
+        if (serviceDefinition != null && serviceDefinition.provides != null) {
+            for (Service.Provides provide : serviceDefinition.provides) {
+                offeredServices.add(serviceName + "_" + provide.port);
                 offeredServices.add(provide.service_name);
             }
         }
 
-        for (ServiceIdShortName serviceIdShortName : serviceIdShortNames) {
-            if (serviceIdShortName.hasDependencies()) {
-                for (String dependsOn : serviceIdShortName.service.depends_on.internal) {
-                    if (offeredServices.contains(dependsOn)) {
-                        result.add(new Connection(serviceIdShortName.id, dependsOn, serviceIdShortName.short_name));
+        for (ServiceIdShortName service : allServices) {
+            if (service.hasDependencies()) {
+                for (Service.DependsOn.Internal dependsOn : service.service.depends_on.internal) {
+                    if (offeredServices.contains(dependsOn.short_name + "_" + dependsOn.port) ||
+                            offeredServices.contains(dependsOn.service_name)) {
+                        result.add(new Connection(service.id, dependsOn, service.short_name));
                     }
                 }
             }

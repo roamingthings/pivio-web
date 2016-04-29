@@ -26,11 +26,11 @@ public class DetailServiceTest {
 
     @Test
     public void getUsageSize() throws Exception {
-        Service serviceC = mapper.readValue(new File("src/test/resources/detailtest/service-c.json"), Service.class);
-        List<ServiceIdShortName> serviceIdShortNames = mapper.readValue(new File("src/test/resources/detailtest/connections.json"), new TypeReference<List<ServiceIdShortName>>() {
+        Service serviceCfromFile = mapper.readValue(new File("src/test/resources/detailtest/service-c.json"), Service.class);
+        List<ServiceIdShortName> allServices = mapper.readValue(new File("src/test/resources/detailtest/connections.json"), new TypeReference<List<ServiceIdShortName>>() {
         });
 
-        List<Connection> usedby = detailService.getUsage("C", serviceC, serviceIdShortNames);
+        List<Connection> usedby = detailService.getUsage("C", serviceCfromFile, allServices);
 
         assertThat(usedby).hasSize(2);
     }

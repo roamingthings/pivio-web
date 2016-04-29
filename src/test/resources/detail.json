@@ -18,8 +18,12 @@
   "service": {
     "depends_on": {
       "internal": [
-        "print-service",
-        "gateway-service"
+        {
+          "service_name":"print-service"
+        },
+        {
+          "service_name":"gateway-service"
+        }
       ],
       "external": [
         {

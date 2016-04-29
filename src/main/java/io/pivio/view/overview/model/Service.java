@@ -17,7 +17,7 @@ public class Service {
         public DependsOn() {
         }
 
-        public List<String> internal = new ArrayList<>();
+        public List<Internal> internal = new ArrayList<>();
         public List<External> external = new ArrayList<>();
 
         @JsonIgnoreProperties(ignoreUnknown = true)
@@ -41,6 +41,28 @@ public class Service {
                         '}';
             }
 
+        }
+
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        public static class Internal {
+
+            public Internal() {
+            }
+
+            public String service_name;
+            public String short_name;
+            public String port;
+            public String why;
+
+            @Override
+            public String toString() {
+                return "Internal{" +
+                        "service_name='" + service_name + '\'' +
+                        ", short_name='" + short_name + '\'' +
+                        ", port=" + port +
+                        ", why='" + why + '\'' +
+                        '}';
+            }
         }
 
         @Override
@@ -79,7 +101,7 @@ public class Service {
         }
 
         public String getTechInfo() {
-            return transport_protocol+" "+protocol+" "+" "+port;
+            return transport_protocol + " " + protocol + " " + " " + port;
         }
 
     }

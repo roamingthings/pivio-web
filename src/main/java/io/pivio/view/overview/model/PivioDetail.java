@@ -35,9 +35,10 @@ public class PivioDetail {
         if (service != null && service.provides != null) {
             for (Service.Provides providedService : service.provides) {
                 for (Connection by : connection) {
-                    if (by.connectionId.equals(providedService.service_name) || by.connectionId.equals(short_name + "_" + providedService.port)) {
-                        providedService.connection.add(by);
-                    }
+//                    if (by.connectionId.service_name.equals(providedService.service_name) || (by.connectionId.short_name.equals(short_name) &&
+//                            by.connectionId.port.equals(providedService.port))) {
+//                        providedService.connection.add(by);
+//                    }
                 }
             }
         }

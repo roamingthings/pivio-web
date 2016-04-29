@@ -26,10 +26,10 @@ public class Service {
             public External() {
             }
 
-            public String target;
-            public String transport_protocol;
-            public String via;
-            public String why;
+            public String target = "";
+            public String transport_protocol = "";
+            public String via = "";
+            public String why = "";
 
             @Override
             public String toString() {
@@ -49,10 +49,10 @@ public class Service {
             public Internal() {
             }
 
-            public String service_name;
-            public String short_name;
-            public String port;
-            public String why;
+            public String service_name = "";
+            public String short_name = "";
+            public String port = "";
+            public String why = "";
 
             @Override
             public String toString() {

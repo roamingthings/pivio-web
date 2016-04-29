@@ -163,8 +163,12 @@
                     </h5>
 
                     <div th:if="${pivio.service.depends_on}" class="ui basic label"
-                         th:each="connection : ${pivio.service.depends_on.internal}"
-                         th:text="${connection}"></div>
+                         th:each="connection : ${pivio.service.depends_on.internal}">
+                        <span th:if="${connection.service_name}" th:text="${connection.service_name}"></span>
+                        <span th:if="${connection.short_name}" th:text="${connection.short_name}"></span>
+                        <span th:if="${connection.port}" th:text="${connection.port}"></span>
+                        <span th:if="${connection.why}" th:text="${connection.why}"></span>
+                    </div>
 
                     <h5 th:if="${not #lists.isEmpty(pivio.service.depends_on.external)}" class="header">
                         Public External

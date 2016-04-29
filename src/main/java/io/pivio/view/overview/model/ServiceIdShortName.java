@@ -10,4 +10,12 @@ public class ServiceIdShortName {
         return service != null && service.depends_on != null;
     }
 
+    @Override
+    public String toString() {
+        return "ServiceIdShortName{" +
+                "service=" + service +
+                ", id='" + id + '\'' +
+                ", short_name='" + short_name + '\'' +
+                '}';
+    }
 }

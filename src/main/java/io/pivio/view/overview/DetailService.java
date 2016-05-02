@@ -36,7 +36,7 @@ class DetailService {
             ResponseEntity pivioDetail = pivioServerConnector.query("document/", id, PivioDetail.class);
             PivioDetail detail = (PivioDetail) pivioDetail.getBody();
             List<ServiceIdShortName> serviceIdShortNames = getConnections();
-            detail.setUsedBy(getUsage(detail.short_name, detail.service, serviceIdShortNames));
+            detail.setUsedBy(getUsedBy(detail.short_name, detail.service, serviceIdShortNames));
             return detail;
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -58,7 +58,7 @@ class DetailService {
         return response.getBody();
     }
 
-    List<Connection> getUsage(String serviceName, Service serviceDefinition, List<ServiceIdShortName> allServices) {
+    List<Connection> getUsedBy(String serviceName, Service serviceDefinition, List<ServiceIdShortName> allServices) {
         List<Connection> result = new ArrayList<>();
         List<String> offeredServices = new ArrayList<>();
 
@@ -69,12 +69,12 @@ class DetailService {
             }
         }
 
-        for (ServiceIdShortName service : allServices) {
-            if (service.hasDependencies()) {
-                for (Service.DependsOn.Internal dependsOn : service.service.depends_on.internal) {
-                    if (offeredServices.contains(dependsOn.short_name + "_" + dependsOn.port) ||
-                            offeredServices.contains(dependsOn.service_name)) {
-                        result.add(new Connection(service.id, dependsOn, service.short_name));
+        for (ServiceIdShortName otherService : allServices) {
+            if (otherService.hasDependencies()) {
+                for (Service.DependsOn.Internal otherServiceDependsOn : otherService.service.depends_on.internal) {
+                    String serviceString = otherServiceDependsOn.short_name + "_" + otherServiceDependsOn.port;
+                    if (offeredServices.contains(serviceString) || offeredServices.contains(otherServiceDependsOn.service_name)) {
+                        result.add(new Connection(otherService.id, otherServiceDependsOn, otherService.short_name));
                     }
                 }
             }

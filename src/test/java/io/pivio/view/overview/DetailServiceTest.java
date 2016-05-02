@@ -30,7 +30,7 @@ public class DetailServiceTest {
         List<ServiceIdShortName> allServices = mapper.readValue(new File("src/test/resources/detailtest/connections.json"), new TypeReference<List<ServiceIdShortName>>() {
         });
 
-        List<Connection> usedby = detailService.getUsage("C", serviceCfromFile, allServices);
+        List<Connection> usedby = detailService.getUsedBy("C", serviceCfromFile, allServices);
 
         assertThat(usedby).hasSize(2);
     }
@@ -41,7 +41,7 @@ public class DetailServiceTest {
         List<ServiceIdShortName> serviceIdShortNames = mapper.readValue(new File("src/test/resources/detailtest/connections.json"), new TypeReference<List<ServiceIdShortName>>() {
         });
 
-        List<Connection> usedby = detailService.getUsage("B", serviceB, serviceIdShortNames);
+        List<Connection> usedby = detailService.getUsedBy("B", serviceB, serviceIdShortNames);
 
         assertThat(usedby.get(0).id).isEqualTo("A");
     }

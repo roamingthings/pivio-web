@@ -9,7 +9,7 @@ import java.util.List;
 public class Service {
 
     public List<Provides> provides = new ArrayList<>();
-    public DependsOn depends_on;
+    public DependsOn depends_on = new DependsOn();
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class DependsOn {

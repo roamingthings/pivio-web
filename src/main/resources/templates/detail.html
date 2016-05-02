@@ -141,11 +141,8 @@
                             <div class="ui label" th:text="${dns}"></div>
                         </div>
 
-                        Used By:
-
-                        <a th:href="'/app/overview
-                        /'+${usedBy.id}" class="ui orange label"
-                           th:each="usedBy : ${info.connection}" th:text="${usedBy.short_name}"></a>
+                        <a th:href="'/app/overview/'+${usedBy.id}" class="ui orange label"
+                           th:each="usedBy : ${info.connection}" th:text="${usedBy.short_name}">-</a>
 
                     </div>
                     <div class="extra content">

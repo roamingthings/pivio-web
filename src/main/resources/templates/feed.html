@@ -17,15 +17,13 @@
             </div>
 
             <div class="content description" th:each="field: ${feeditem.fields}">
-                <div class="ui grey tiny label" th:text="${field.field}"></div>
-                <p/>
-                <b>From: </b>
+                <div>
+                    <i th:class="${field.getColoredIcon() + ' ui icon'}"></i>
+                    <span class="ui grey label" th:text="${field.path}"></span> =
+                    <span th:text="${field.value}">???</span>
 
-                <p><s th:text="${field.previous}">???</s></p>
-                <b>To: </b>
-
-                <p th:text="${field.current}">???</p>
-                <div class="ui clearing divider"></div>
+                </div>
+                <!--<div class="ui clearing divider"></div>-->
             </div>
         </div>
 

@@ -2,14 +2,45 @@ package io.pivio.view.feed.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Field {
 
     public Field() {
     }
 
-    public String previous;
-    public String current;
-    public String field;
+    public String op;
+    public String path;
+    public String value;
+
+    public String getColor() {
+        if (op.equals("add")) {
+            return "green";
+        }
+        if (op.equals("replace")) {
+            return "orange";
+        }
+        if (op.equals("remove")) {
+            return "red";
+        }
+        return "grey";
+    }
+
+    public String getIcon() {
+        if (op.equals("add")) {
+            return "circle add";
+        }
+        if (op.equals("replace")) {
+            return "arrow circle down";
+        }
+        if (op.equals("remove")) {
+            return "minus circle";
+        }
+        return "selected radio";
+
+    }
+
+    public String getColoredIcon() {
+        return getColor() + " " + getIcon();
+    }
 
 }

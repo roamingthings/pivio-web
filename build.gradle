@@ -16,6 +16,10 @@ apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
 apply plugin: 'idea'
 
+plugins {
+	id "org.sonarqube" version "2.0.1"
+}
+
 jar {
 	baseName = 'view'
 	version = ''

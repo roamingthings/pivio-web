@@ -1,5 +1,6 @@
 api: http://localhost:9123/
 js_api: http://localhost:9123/
+mainUrl: http://localhost:8080/
 pages:
   - description: Overview
     url: /app/overview
@@ -7,9 +8,6 @@ pages:
   - description: Query
     url: /app/query
     id: tabQuery
-#  - description: Service Graph
-#    url: /app/servicegraph
-#    id: tabServiceGraph
   - description: Feed
     url: /app/feed
     id: tabFeed

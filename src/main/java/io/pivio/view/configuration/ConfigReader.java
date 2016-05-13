@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,9 +33,10 @@ public class ConfigReader {
             if (objectMap.containsKey("pages")) {
                 serverConfig.pages = (List) objectMap.get("pages");
             }
-            if (objectMap.containsKey("api")) {
-                serverConfig.apiAddress = (String) objectMap.get("api");
-            }
+
+            serverConfig.apiAddress = getValueFromConfigMap(objectMap, "api", serverConfig.apiAddress);
+            serverConfig.jsApiAddress = getValueFromConfigMap(objectMap, "js_api", serverConfig.jsApiAddress);
+            serverConfig.mainUrl = getValueFromConfigMap(objectMap, "mainUrl", serverConfig.mainUrl);
 
             String pivioServer = System.getenv("PIVIO_SERVER");
             if (pivioServer != null) {
@@ -46,6 +48,18 @@ public class ConfigReader {
                 serverConfig.jsApiAddress = pivioServerJS;
             }
 
+            for (Object page : serverConfig.pages) {
+                if (page instanceof HashMap) {
+                    HashMap p = ((HashMap) page);
+                    if (p.containsKey("url")) {
+                        String url = (String) p.get("url");
+                        if (url.startsWith("/")) {
+                            p.put("url", serverConfig.mainUrl + p.get("url"));
+                        }
+                    }
+                }
+            }
+
             log.info("Using config: " + serverConfig.toString());
 
         } catch (FileNotFoundException e) {
@@ -53,6 +67,13 @@ public class ConfigReader {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+    }
+
+    private String getValueFromConfigMap(Map<String, Object> objectMap, String key, String defaultValue) {
+        if (objectMap.containsKey(key)) {
+            return (String) objectMap.get(key);
+        }
+        return defaultValue;
     }
 
     Map<String, Object> readYamlFile(String yamlFile) throws FileNotFoundException, UnsupportedEncodingException {

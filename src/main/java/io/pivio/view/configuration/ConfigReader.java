@@ -48,6 +48,11 @@ public class ConfigReader {
                 serverConfig.jsApiAddress = pivioServerJS;
             }
 
+            String mainUrl = System.getenv("PIVIO_VIEW");
+            if (pivioServerJS != null) {
+                serverConfig.mainUrl = mainUrl;
+            }
+
             for (Object page : serverConfig.pages) {
                 if (page instanceof HashMap) {
                     HashMap p = ((HashMap) page);
@@ -63,7 +68,7 @@ public class ConfigReader {
             log.info("Using config: " + serverConfig.toString());
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Config file: "+configFile+" not found.");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -77,6 +82,7 @@ public class ConfigReader {
     }
 
     Map<String, Object> readYamlFile(String yamlFile) throws FileNotFoundException, UnsupportedEncodingException {
+        System.out.println("Config file: "+configFile+".");
         File file = new File(yamlFile);
         BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
         YamlReader yamlReader = new YamlReader(in);

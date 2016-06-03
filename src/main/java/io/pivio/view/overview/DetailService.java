@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -79,6 +80,7 @@ class DetailService {
                 }
             }
         }
+        Collections.sort(result);
         return result;
     }
 

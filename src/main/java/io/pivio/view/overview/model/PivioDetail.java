@@ -2,10 +2,7 @@ package io.pivio.view.overview.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.Collections.sort;
 
@@ -53,7 +50,7 @@ public class PivioDetail {
                 }
             }
         }
-//        sort(result);
+        Collections.sort(result);
         return result;
     }
 

@@ -1,6 +1,7 @@
 package io.pivio.view.overview.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.pivio.view.app.overview.detail.view.DependentServiceViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,11 @@ public class Service {
             public String short_name = "";
             public String port = "";
             public String why = "";
+            public String label = "";
+
+            public String getId() {
+                return short_name;
+            }
 
             @Override
             public String toString() {
@@ -86,7 +92,7 @@ public class Service {
         public String transport_protocol = "";
         public String description = "";
         public List<String> public_dns = new ArrayList<>();
-        public List<Connection> connection = new ArrayList<>();
+        public List<DependentServiceViewModel> dependentServiceViewModel = new ArrayList<>();
 
         @Override
         public String toString() {

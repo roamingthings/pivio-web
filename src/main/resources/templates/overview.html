@@ -23,7 +23,7 @@
     <div id="cards" class="ui cards container centered grey">
 
         <!--@thymesVar id="pivioOverview" type="java.util.List"-->
-        <!--@thymesVar id="card" type="io.pivio.view.overview.model.OverviewCard"-->
+        <!--@thymesVar id="card" type="io.pivio.view.app.overview.list.OverviewModel"-->
         <a th:each="card : ${pivioOverview}" class="ui blue card"
            data-th-attr="data-meta=${card.meta}" th:href="'/app/overview/' + ${card.id}">
             <div class="content">

@@ -1,7 +1,9 @@
 package io.pivio.view;
 
+import io.pivio.view.app.overview.detail.serverresponse.Document;
+import io.pivio.view.app.overview.list.serverresponse.Overview;
 import io.pivio.view.configuration.ServerConfig;
-import io.pivio.view.overview.model.OverviewCard;
+import io.pivio.view.app.overview.detail.ServiceIdShortName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,12 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
+
+import static java.util.Collections.sort;
 
 @Component
 public class PivioServerConnector {
@@ -23,14 +28,57 @@ public class PivioServerConnector {
     ServerConfig serverConfig;
 
     public <T> ResponseEntity query(String path, String query, Class<T> type) throws UnsupportedEncodingException {
-        RestTemplate restTemplate = new RestTemplate();
         String encodedQuery = URLEncoder.encode(query, "UTF-8");
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Content-Type", MediaType.APPLICATION_JSON_VALUE);
-        String url = serverConfig.apiAddress + path + encodedQuery;
-        log.debug("Asking: " + url);
-        ResponseEntity<T> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>("", headers), type);
-        log.debug(response.getBody().toString());
+        return get(serverConfig.apiAddress + path + encodedQuery, type);
+    }
+
+    public Document getDocumentById(String id) throws UnsupportedEncodingException {
+        ResponseEntity responseEntity = get(serverConfig.apiAddress + "/document/" + id, Document.class);
+        return (Document) responseEntity.getBody();
+    }
+
+    public <T> ResponseEntity list(String path, Class<T> type) throws UnsupportedEncodingException {
+        return get(serverConfig.apiAddress + path, type);
+    }
+
+    public List<Overview> getOverviews() throws IOException {
+        String path = "/document?fields=short_name,id,description,name,owner,context,lastUpdate,lastUpload&sort=name:asc";
+        String url = serverConfig.apiAddress + path;
+        RestTemplate restTemplate = new RestTemplate();
+        ParameterizedTypeReference<List<Overview>> typeRef = new ParameterizedTypeReference<List<Overview>>() {
+        };
+        List<Overview> result;
+        try {
+            ResponseEntity<List<Overview>> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>("", getHeaders()), typeRef);
+            result = response.getBody();
+            sort(result);
+        } catch (Exception e) {
+            throw new IOException();
+        }
+        return result;
+    }
+
+    private <T> ResponseEntity get(String url, Class<T> type) throws UnsupportedEncodingException {
+        RestTemplate restTemplate = new RestTemplate();
+        log.debug("Asking for :" + url);
+        ResponseEntity<T> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>("", getHeaders()), type);
+        log.debug("Response :" + response.getBody().toString());
         return response;
     }
+
+    private HttpHeaders getHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", MediaType.APPLICATION_JSON_VALUE);
+        return headers;
+    }
+
+    public List<ServiceIdShortName> getAllServices() {
+        String url =  serverConfig.apiAddress + "/document?fields=service,id,short_name";
+        RestTemplate restTemplate = new RestTemplate();
+        ParameterizedTypeReference<List<ServiceIdShortName>> typeRef = new ParameterizedTypeReference<List<ServiceIdShortName>>() {
+        };
+        ResponseEntity<List<ServiceIdShortName>> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>("", getHeaders()), typeRef);
+        return response.getBody();
+    }
+
 }

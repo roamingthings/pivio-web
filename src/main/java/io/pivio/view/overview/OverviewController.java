@@ -26,37 +26,37 @@ public class OverviewController {
     ServerConfig serverConfig;
 
     @Autowired
-    DetailService detailService;
+    DetailService2 detailService;
 
     @Autowired
     OverviewService overviewService;
 
-    @RequestMapping("/")
-    public String main() {
-        return "redirect:/app/overview";
-    }
+//    @RequestMapping("/")
+//    public String main() {
+//        return "redirect:/app/overview";
+//    }
 
-    @RequestMapping("/app/overview")
-    public String overview(Model model ) {
-        model.addAttribute("config", serverConfig);
-        model.addAttribute("pageId", "tabOverview");
-        List<OverviewCard> overview = new ArrayList<>();
-        try {
-            overview = overviewService.getOverview();
-        } catch (IOException e) {
-            model.addAttribute("pivioErrorMessage", "Document server is not reachable. Please try again later.");
-        }
-        model.addAttribute("pivioOverview", overview);
-        return "overview";
-    }
+//    @RequestMapping("/app/overview")
+//    public String overview(Model serverresponse ) {
+//        serverresponse.addAttribute("config", serverConfig);
+//        serverresponse.addAttribute("pageId", "tabOverview");
+//        List<OverviewCard> overview = new ArrayList<>();
+//        try {
+//            overview = overviewService.getOverview();
+//        } catch (IOException e) {
+//            serverresponse.addAttribute("pivioErrorMessage", "Document server is not reachable. Please try again later.");
+//        }
+//        serverresponse.addAttribute("pivioOverview", overview);
+//        return "overview";
+//    }
 
-    @RequestMapping(value = "/app/overview/{id}")
-    public String detail(@PathVariable String id, Model model) {
-        model.addAttribute("config", serverConfig);
-        model.addAttribute("pageId", "tabOverview");
-        model.addAttribute("pivio", detailService.getDetail(id));
-        return "detail";
-    }
+//    @RequestMapping(value = "/app/overview/{id}")
+//    public String detail(@PathVariable String id, Model model) {
+//        model.addAttribute("config", serverConfig);
+//        model.addAttribute("pageId", "tabOverview");
+//        model.addAttribute("pivio", detailService.getDetail(id));
+//        return "detail";
+//    }
 
     @RequestMapping(value = "/app/overview/{id}/delete")
     public String delete(@PathVariable String id, RedirectAttributes redirectAttributes) {

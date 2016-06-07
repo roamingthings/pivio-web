@@ -1,6 +1,8 @@
 package io.pivio.view.overview.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.pivio.view.app.overview.detail.view.DependentServiceViewModel;
+import io.pivio.view.app.overview.detail.ServiceIdShortName;
 
 import java.util.*;
 
@@ -28,27 +30,47 @@ public class PivioDetail {
     public String lastUpdate;
     public List<SoftwareDependency> software_dependencies = new ArrayList<>();
 
-    public void setUsedBy(List<Connection> connection) {
+    public void setUsedBy(List<DependentServiceViewModel> dependentServiceViewModel) {
         if (service != null && service.provides != null) {
             for (Service.Provides providedService : service.provides) {
-                for (Connection by : connection) {
-                    if (by.connectionId.service_name.equals(providedService.service_name) || (by.connectionId.short_name.equals(short_name) &&
-                            by.connectionId.port.equals(providedService.port))) {
-                        providedService.connection.add(by);
-                    }
+                for (DependentServiceViewModel by : dependentServiceViewModel) {
+//                    if (by.connectionId.service_name.equals(providedService.service_name) ||
+//                            (by.connectionId.short_name.equals(short_name) &&
+//                                    by.connectionId.port.equals(providedService.port))) {
+//                        providedService.dependentService.add(by);
+//                    }
                 }
             }
         }
     }
 
+    public void setInternalUsage(List<ServiceIdShortName> serviceIdShortNames) {
+        Map<String, String> mapServiceNameToShortName = new HashMap<>();
+        for (ServiceIdShortName serviceIdShortName : serviceIdShortNames) {
+            if (serviceIdShortName.service.provides != null) {
+//                for (Service.Provides service : serviceIdShortName.service.provides) {
+//                    if (service.service_name!=null) {
+//                        mapServiceNameToShortName.put(service.service_name, serviceIdShortName.id);
+//                    }
+//                }
+            }
+        }
+
+        for (ServiceIdShortName serviceIdShortName : serviceIdShortNames) {
+            System.out.println(serviceIdShortName.id);
+        }
+
+
+        for (Service.DependsOn.Internal internal : service.depends_on.internal) {
+            System.out.println(internal.toString());
+        }
+
+    }
+
     public List getConsolidatedLicenses() {
         List<String> result = new ArrayList<>();
         for (SoftwareDependency software_dependency : software_dependencies) {
-            for (License license : software_dependency.licenses) {
-                if (!result.contains(license.name)) {
-                    result.add(license.name);
-                }
-            }
+            software_dependency.licenses.stream().filter(license -> !result.contains(license.name)).forEach(license -> result.add(license.name));
         }
         Collections.sort(result);
         return result;

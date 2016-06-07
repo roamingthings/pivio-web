@@ -11,3 +11,6 @@ pages:
   - description: Feed
     url: /app/feed
     id: tabFeed
+  - description: SW Deps
+    url: http://localhost:2015
+    id: tabSystemDependencies

@@ -10,7 +10,7 @@
 
     <div th:each="feeditem: ${changeset}" class="ui card" style="width: 100%">
         <div class="content" style="width: 100%">
-            <!--@thymesVar id="feeditem" type="io.pivio.view.feed.model.FeedItem"-->
+            <!--@thymesVar id="feeditem" type="io.pivio.view.app.feed.model.FeedItem"-->
             <div class="ui blue header" th:text="${feeditem.document}"></div>
             <div class="meta">
                 <span class="right floated time" th:text="${feeditem.getPrettyDate()}"></span>

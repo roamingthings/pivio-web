@@ -1,4 +1,4 @@
-package io.pivio.view.query;
+package io.pivio.view.app.query;
 
 import io.pivio.view.configuration.ServerConfig;
 import org.springframework.beans.factory.annotation.Autowired;

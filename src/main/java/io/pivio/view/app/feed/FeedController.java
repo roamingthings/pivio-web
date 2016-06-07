@@ -1,4 +1,4 @@
-package io.pivio.view.feed;
+package io.pivio.view.app.feed;
 
 import io.pivio.view.configuration.ServerConfig;
 import org.springframework.beans.factory.annotation.Autowired;

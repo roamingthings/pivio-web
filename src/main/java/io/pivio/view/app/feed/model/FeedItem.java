@@ -1,4 +1,4 @@
-package io.pivio.view.feed.model;
+package io.pivio.view.app.feed.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.joda.time.DateTime;

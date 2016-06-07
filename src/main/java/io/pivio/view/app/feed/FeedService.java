@@ -1,8 +1,8 @@
-package io.pivio.view.feed;
+package io.pivio.view.app.feed;
 
 import io.pivio.view.PivioServerConnector;
 import io.pivio.view.configuration.ServerConfig;
-import io.pivio.view.feed.model.FeedItem;
+import io.pivio.view.app.feed.model.FeedItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,5 +37,14 @@ public class ListController {
         }
         model.addAttribute("pivioOverview", overview);
         return "overview";
+    }
+
+    @RequestMapping("/app/overview/list")
+    public String similar(@RequestParam("field") String field, @RequestParam("value") String value, Model model) {
+        model.addAttribute("config", serverConfig);
+        model.addAttribute("pageId", "tabOverview");
+        model.addAttribute("field", field);
+        model.addAttribute("value", value);
+        return "list";
     }
 }

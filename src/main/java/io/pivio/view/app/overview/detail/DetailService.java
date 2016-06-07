@@ -3,7 +3,6 @@ package io.pivio.view.app.overview.detail;
 import io.pivio.view.PivioServerConnector;
 import io.pivio.view.app.overview.detail.serverresponse.Document;
 import io.pivio.view.app.overview.detail.serverresponse.Internal;
-import io.pivio.view.app.overview.detail.serverresponse.Provides;
 import io.pivio.view.app.overview.detail.view.DocumentViewModel;
 import io.pivio.view.app.overview.detail.view.ProvidesModel;
 import io.pivio.view.app.overview.detail.view.ServiceDependencyViewModel;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,7 +57,7 @@ public class DetailService {
 
     private String getServiceDisplayName(Internal internalDependency) {
         String serviceDisplayName = internalDependency.service_name;
-        if (serviceDisplayName == null) {
+        if (serviceDisplayName == "") {
             serviceDisplayName = internalDependency.short_name + " : " + internalDependency.port;
         }
         if (serviceDisplayName == "") {

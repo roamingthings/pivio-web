@@ -81,4 +81,17 @@ public class PivioServerConnector {
         return response.getBody();
     }
 
+    public boolean deleteDocument(String id) throws IOException {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = getHeaders();
+        String url = serverConfig.apiAddress + "/document/" + id;
+        ResponseEntity<Object> exchange = null;
+        try {
+            exchange = restTemplate.exchange(url, HttpMethod.DELETE, new HttpEntity<>("", headers), Object.class);
+        } catch (Exception e) {
+            throw new IOException();
+        }
+        return exchange != null && exchange.getStatusCode() == HttpStatus.ACCEPTED;
+    }
+
 }

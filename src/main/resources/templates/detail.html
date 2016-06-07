@@ -23,7 +23,8 @@
 
                 <div class="ui  basic label">
                     <i class="users icon"></i> Owner
-                    <a th:href="'/app/overview/list?field=owner&amp;value='+${pivio.document.owner}" th:text="${pivio.document.owner}"
+                    <a th:href="'/app/overview/list?field=owner&amp;value='+${pivio.document.owner}"
+                       th:text="${pivio.document.owner}"
                        class="detail"></a>
                 </div>
 
@@ -142,7 +143,8 @@
                         </div>
 
                         <a th:href="'/app/overview/'+${dependentServices.id}" class="ui orange label"
-                           th:each="dependentServices : ${provides.dependentServices}" th:text="${dependentServices.short_name}">-</a>
+                           th:each="dependentServices : ${provides.dependentServices}"
+                           th:text="${dependentServices.short_name}">-</a>
 
                     </div>
                     <div class="extra content">
@@ -160,9 +162,14 @@
                         Internal
                     </h5>
 
-                    <div class="ui divided">
-                        <a th:if="${pivio.service.internalServiceDependencies}" class="ui blue label" th:href="'/app/overview/'+${internalDepdency.serviceId}"
-                             th:each="internalDepdency : ${pivio.service.internalServiceDependencies}" th:text="${internalDepdency.serviceDisplayName}"/>
+                    <div class="ui divided" th:if="${pivio.service.internalServiceDependencies}">
+                        <span th:each="internalDependency : ${pivio.service.internalServiceDependencies}">
+                        <a th:if="${internalDependency.hasServiceId()}" class="blue ui label"
+                           th:href="'/app/overview/'+${internalDependency.serviceId}"
+                           th:text="${internalDependency.serviceDisplayName}"/>
+                        <span th:if="${!internalDependency.hasServiceId()}" class="gray ui label"
+                              th:text="${internalDependency.serviceDisplayName}"/>
+                        </span>
                     </div>
 
                     <h5 th:if="${not #lists.isEmpty(pivio.document.service.depends_on.external)}" class="header">
@@ -185,24 +192,24 @@
             <!-- Software Dependencies -->
 
             <!--<div th:if="${pivio.document.software_dependencies}" class="ui segment">-->
-                <!--<div class="ui red top attached label">Software Dependencies</div>-->
-                <!--<div class="ui ribbon left basic label">In Use</div>-->
-                <!--<ul class="ui list" th:each="dep : ${pivio.sortedDependencies}">-->
-                    <!--<li><a th:href="'/app/overview/list?field=software_dependencies.name&amp;value='+${dep.name}"-->
-                           <!--th:text="${dep.name +' : '+ dep.version+' '}"></a>-->
-                    <!--</li>-->
-                <!--</ul>-->
+            <!--<div class="ui red top attached label">Software Dependencies</div>-->
+            <!--<div class="ui ribbon left basic label">In Use</div>-->
+            <!--<ul class="ui list" th:each="dep : ${pivio.sortedDependencies}">-->
+            <!--<li><a th:href="'/app/overview/list?field=software_dependencies.name&amp;value='+${dep.name}"-->
+            <!--th:text="${dep.name +' : '+ dep.version+' '}"></a>-->
+            <!--</li>-->
+            <!--</ul>-->
 
-                <!--<p/>-->
+            <!--<p/>-->
 
-                <!--<div class="ui ribbon left basic label">Licenses</div>-->
-                <!--<ul class="ui list" th:each="license : ${pivio.consolidatedLicenses}">-->
-                    <!--<li>-->
-                        <!--<a th:href="'/app/overview/list?field=software_dependencies.licenses.name&amp;value='+${license}"-->
-                           <!--th:text="${license}"></a>-->
-                    <!--</li>-->
+            <!--<div class="ui ribbon left basic label">Licenses</div>-->
+            <!--<ul class="ui list" th:each="license : ${pivio.consolidatedLicenses}">-->
+            <!--<li>-->
+            <!--<a th:href="'/app/overview/list?field=software_dependencies.licenses.name&amp;value='+${license}"-->
+            <!--th:text="${license}"></a>-->
+            <!--</li>-->
 
-                <!--</ul>-->
+            <!--</ul>-->
 
 
             <!--</div>-->

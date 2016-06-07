@@ -1,5 +1,6 @@
-package io.pivio.view.overview.model;
+package io.pivio.view.app.overview.detail;
 
+import io.pivio.view.app.overview.detail.serverresponse.SoftwareDependency;
 import org.junit.Test;
 
 import java.util.ArrayList;

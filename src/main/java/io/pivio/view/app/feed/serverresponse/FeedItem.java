@@ -1,4 +1,4 @@
-package io.pivio.view.app.feed.model;
+package io.pivio.view.app.feed.serverresponse;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.joda.time.DateTime;
@@ -19,7 +19,4 @@ public class FeedItem {
     public FeedItem() {
     }
 
-    public String getPrettyDate() {
-        return new PrettyTime().format(new DateTime(timestamp).toDate());
-    }
 }

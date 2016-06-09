@@ -8,15 +8,16 @@
 <body>
 <div th:fragment="content">
 
-    <div th:each="feeditem: ${changeset}" class="ui card" style="width: 100%">
+    <!--/*@thymesVar id="changeset" type="java.util.List"*/-->
+    <div th:each="model: ${changeset}" class="ui card" style="width: 100%">
         <div class="content" style="width: 100%">
-            <!--@thymesVar id="feeditem" type="io.pivio.view.app.feed.model.FeedItem"-->
-            <div class="ui blue header" th:text="${feeditem.document}"></div>
+            <!--@thymesVar id="model" type="io.pivio.view.app.feed.FeedModel"-->
+            <a th:href="'/app/overview/'+${model.feedItem.document}" class="ui blue header" th:text="${model.short_name}"></a>
             <div class="meta">
-                <span class="right floated time" th:text="${feeditem.getPrettyDate()}"></span>
+                <span class="right floated time" th:text="${model.getPrettyDate()}"></span>
             </div>
 
-            <div class="content description" th:each="field: ${feeditem.fields}">
+            <div class="content description" th:each="field: ${model.feedItem.fields}">
                 <div>
                     <i th:class="${field.getColoredIcon() + ' ui icon'}"></i>
                     <span class="ui grey label" th:text="${field.path}"></span> =

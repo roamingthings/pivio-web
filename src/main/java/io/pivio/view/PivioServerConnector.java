@@ -1,5 +1,6 @@
 package io.pivio.view;
 
+import io.pivio.view.app.feed.serverresponse.FeedItem;
 import io.pivio.view.app.overview.detail.serverresponse.Document;
 import io.pivio.view.app.overview.list.serverresponse.Overview;
 import io.pivio.view.configuration.ServerConfig;
@@ -94,4 +95,13 @@ public class PivioServerConnector {
         return exchange != null && exchange.getStatusCode() == HttpStatus.ACCEPTED;
     }
 
+    public List<FeedItem> getChangeset() {
+        String url = serverConfig.apiAddress + "/changeset";
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = getHeaders();
+        ParameterizedTypeReference<List<FeedItem>> typeRef = new ParameterizedTypeReference<List<FeedItem>>() {
+        };
+        ResponseEntity<List<FeedItem>> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>("", headers), typeRef);
+        return response.getBody();
+    }
 }

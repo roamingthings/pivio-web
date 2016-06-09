@@ -44,13 +44,15 @@ public class DetailService {
 
         Map<String, String> serviceNameMap = serviceListGenerator.getServiceNameMap();
 
-        for (Internal internalDependency : document.service.depends_on.internal) {
-            String serviceDisplayName = getServiceDisplayName(internalDependency);
-            String linkId = "";
-            if (serviceNameMap.containsKey(serviceDisplayName)) {
-                linkId = serviceNameMap.get(serviceDisplayName);
+        if (document.service != null && document.service.depends_on != null) {
+            for (Internal internalDependency : document.service.depends_on.internal) {
+                String serviceDisplayName = getServiceDisplayName(internalDependency);
+                String linkId = "";
+                if (serviceNameMap.containsKey(serviceDisplayName)) {
+                    linkId = serviceNameMap.get(serviceDisplayName);
+                }
+                result.service.internalServiceDependencies.add(new ServiceDependencyViewModel(linkId, serviceDisplayName));
             }
-            result.service.internalServiceDependencies.add(new ServiceDependencyViewModel(linkId, serviceDisplayName));
         }
         return result;
     }

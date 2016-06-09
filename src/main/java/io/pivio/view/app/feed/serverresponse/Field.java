@@ -1,4 +1,4 @@
-package io.pivio.view.app.feed.model;
+package io.pivio.view.app.feed.serverresponse;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

@@ -27,10 +27,10 @@ public class Document {
     public List<String> tags = new ArrayList<>();
     public Map<String, String> links = new HashMap<>();
 
-    public Runtime runtime;
-    public SoftwareDependency software_dependency;
-    public Service service;
-    public Context context;
+    public Runtime runtime = new Runtime();
+    public SoftwareDependency software_dependency = new SoftwareDependency();
+    public Service service = new Service();
+    public Context context = new Context();
 
     @Override
     public String toString() {

@@ -16,14 +16,15 @@
             <i class="search icon"></i>
         </div>
     </div>
-    <h4 class="ui horizontal divider header">
-        Matching Artefacts
+    <!--@thymesVar id="pivioOverview" type="java.util.List"-->
+    <!--@thymesVar id="card" type="io.pivio.view.app.overview.list.OverviewModel"-->
+
+    <h4 id="artifactsheader" class="ui horizontal divider header">
+        Matching Artifacts
     </h4>
 
     <div id="cards" class="ui cards container centered grey">
 
-        <!--@thymesVar id="pivioOverview" type="java.util.List"-->
-        <!--@thymesVar id="card" type="io.pivio.view.app.overview.list.OverviewModel"-->
         <a th:each="card : ${pivioOverview}" class="ui blue card"
            data-th-attr="data-meta=${card.meta}" th:href="'/app/overview/' + ${card.id}">
             <div class="content">

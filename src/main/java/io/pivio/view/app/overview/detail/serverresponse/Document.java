@@ -2,7 +2,6 @@ package io.pivio.view.app.overview.detail.serverresponse;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.lang.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +27,7 @@ public class Document {
     public Map<String, String> links = new HashMap<>();
 
     public Runtime runtime = new Runtime();
-    public SoftwareDependency software_dependency = new SoftwareDependency();
+    public List<SoftwareDependency> software_dependencies = new ArrayList<>();
     public Service service = new Service();
     public Context context = new Context();
 
@@ -51,7 +50,7 @@ public class Document {
                 ", tags=" + tags +
                 ", links=" + links +
                 ", runtime=" + runtime +
-                ", software_dependency=" + software_dependency +
+                ", software_dependencies=" + software_dependencies +
                 ", service=" + service +
                 ", context=" + context +
                 '}';

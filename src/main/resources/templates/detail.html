@@ -166,9 +166,9 @@
                         <span th:each="internalDependency : ${pivio.service.internalServiceDependencies}">
                         <a th:if="${internalDependency.hasServiceId()}" class="blue ui label"
                            th:href="'/app/overview/'+${internalDependency.serviceId}"
-                           th:text="${internalDependency.serviceDisplayName}"/>
+                           th:text="${internalDependency.serviceDisplayName}"></a>
                         <span th:if="${!internalDependency.hasServiceId()}" class="gray ui label"
-                              th:text="${internalDependency.serviceDisplayName}"/>
+                              th:text="${internalDependency.serviceDisplayName}"></span>
                         </span>
                     </div>
 

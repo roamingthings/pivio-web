@@ -59,10 +59,10 @@ public class DetailService {
 
     private String getServiceDisplayName(Internal internalDependency) {
         String serviceDisplayName = internalDependency.service_name;
-        if (serviceDisplayName == "") {
+        if (serviceDisplayName.equals("")) {
             serviceDisplayName = internalDependency.short_name + " : " + internalDependency.port;
         }
-        if (serviceDisplayName == "") {
+        if (serviceDisplayName.equals("")) {
             serviceDisplayName = "UNKNOWN";
         }
         return serviceDisplayName;

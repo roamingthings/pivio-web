@@ -1,5 +1,5 @@
-api: http://steckbrief-01.bis.epost-dev.de:9123/
-js_api: http://steckbrief-01.bis.epost-dev.de:9123/
+api: http://localhost:9123/
+js_api: http://localhost:9123/
 mainUrl: http://localhost:8080/
 pages:
   - description: Overview
@@ -11,6 +11,3 @@ pages:
   - description: Feed
     url: /app/feed
     id: tabFeed
-  - description: SW Deps
-    url: http://localhost:2015
-    id: tabSystemDependencies

@@ -25,7 +25,7 @@ public class DocumentViewModel {
         return document.short_name != null ? "(" + document.short_name + ")" : "";
     }
 
-    public void setupServiceViewModel() {
+    private void setupServiceViewModel() {
         for (Provides provide : document.service.provides) {
             service.provides.add(new ProvidesModel(provide));
         }
@@ -37,10 +37,15 @@ public class DocumentViewModel {
         for (SoftwareDependency software_dependency : softwareDependencies) {
             for (License license : software_dependency.licenses) {
                 if (!result.contains(license.name)) {
-                    result.add(license.name);
+                    if (license.name != null) {
+                        result.add(license.name);
+                    } else {
+                        result.add("Unknown license.");
+                    }
                 }
             }
         }
+        Object[] a = result.toArray();
         sort(result);
         return result;
     }

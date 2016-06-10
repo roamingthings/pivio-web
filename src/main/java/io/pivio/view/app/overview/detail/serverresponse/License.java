@@ -6,4 +6,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class License {
     public String name;
     public String url;
+
+    public License(String name, String url) {
+        this.name = name;
+        this.url = url;
+    }
+
+    public License() {
+    }
 }

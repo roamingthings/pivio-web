@@ -12,6 +12,7 @@ import static java.util.Collections.sort;
 
 public class DocumentViewModel {
 
+    final String UNKNOWN_LICENSE = "Unknown License.";
     public Document document;
     public ServiceViewModel service = new ServiceViewModel();
     public List<SoftwareDependency> softwareDependencies = new ArrayList<>();
@@ -36,12 +37,12 @@ public class DocumentViewModel {
         List<String> result = new ArrayList<>();
         for (SoftwareDependency software_dependency : softwareDependencies) {
             for (License license : software_dependency.licenses) {
-                if (!result.contains(license.name)) {
-                    if (license.name != null) {
-                        result.add(license.name);
-                    } else {
-                        result.add("Unknown license.");
-                    }
+                String licenseName = license.name;
+                if (licenseName == null) {
+                    licenseName = UNKNOWN_LICENSE;
+                }
+                if (!result.contains(licenseName)) {
+                    result.add(licenseName);
                 }
             }
         }

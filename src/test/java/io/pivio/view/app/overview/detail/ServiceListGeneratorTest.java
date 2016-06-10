@@ -32,7 +32,7 @@ public class ServiceListGeneratorTest {
     public void testSize() throws Exception {
         when(pivioServerConnectorMock.getAllServices()).thenReturn(serviceIdShortNames);
         Map<String, String> serviceNameMap = serviceListGenerator.getServiceNameMap();
-        assertThat(serviceNameMap.keySet()).hasSize(6);
+        assertThat(serviceNameMap.keySet()).hasSize(8);
     }
 
     @Test

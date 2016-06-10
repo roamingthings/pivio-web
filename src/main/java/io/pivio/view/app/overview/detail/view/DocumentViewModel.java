@@ -45,7 +45,6 @@ public class DocumentViewModel {
                 }
             }
         }
-        Object[] a = result.toArray();
         sort(result);
         return result;
     }

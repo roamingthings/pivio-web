@@ -195,8 +195,10 @@
                 <div class="ui red top attached label">Software Dependencies</div>
                 <div class="ui ribbon left basic label">In Use</div>
                 <ul class="ui list" th:each="dep : ${pivio.sortedDependencies}">
-                    <li><a th:href="'/app/overview/list?field=software_dependencies.name&amp;value='+${dep.name}"
-                           th:text="${dep.name +' : '+ dep.version+' '}"></a>
+                    <li>
+                        <span th:text="${dep.name +' : '+ dep.version+' '}"></span>
+                        <!--<a th:href="'/app/overview/list?field=software_dependencies.name&amp;value='+${dep.name}"-->
+                           <!--th:text="${dep.name +' : '+ dep.version+' '}"></a>-->
                     </li>
                 </ul>
 
@@ -205,8 +207,9 @@
                 <div class="ui ribbon left basic label">Licenses</div>
             <ul class="ui list" th:each="license : ${pivio.consolidatedLicenses}">
                 <li>
-                    <a th:href="'/app/overview/list?field=software_dependencies.licenses.name&amp;value='+${license}"
-                       th:text="${license}"></a>
+                    <span th:text="${license}"></span>
+                    <!--<a th:href="'/app/overview/list?field=software_dependencies.licenses.name&amp;value='+${license}"-->
+                       <!--th:text="${license}"></a>-->
                 </li>
 
             </ul>

@@ -25,12 +25,14 @@ public class ServiceListGenerator {
 
         Map<String, String> serviceNameMap = new HashMap<>();
         for (ServiceIdShortName service : allServices) {
-            for (Provides provide : service.service.provides) {
-                if (provide.service_name != null) {
-                    serviceNameMap.put(provide.service_name, service.id);
-                }
-                if (service.short_name != null) {
-                    serviceNameMap.put(service.short_name + " : " + provide.port, service.id);
+            if (service.service != null) {
+                for (Provides provide : service.service.provides) {
+                    if (provide.service_name != null) {
+                        serviceNameMap.put(provide.service_name, service.id);
+                    }
+                    if (service.short_name != null) {
+                        serviceNameMap.put(service.short_name + " : " + provide.port, service.id);
+                    }
                 }
             }
         }

@@ -12,6 +12,12 @@ public class Field {
     public String path;
     public String value;
 
+    public Field(String op, String path, String value) {
+        this.op = op;
+        this.path = path;
+        this.value = value;
+    }
+
     public String getColor() {
         if (op.equals("add")) {
             return "green";

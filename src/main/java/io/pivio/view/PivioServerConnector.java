@@ -96,7 +96,7 @@ public class PivioServerConnector {
     }
 
     public List<FeedItem> getChangeset() {
-        String url = serverConfig.apiAddress + "/changeset";
+        String url = serverConfig.apiAddress + "/changeset?since=7d";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = getHeaders();
         ParameterizedTypeReference<List<FeedItem>> typeRef = new ParameterizedTypeReference<List<FeedItem>>() {

@@ -9,27 +9,46 @@
 <div th:fragment="content">
 
     <!--/*@thymesVar id="changeset" type="java.util.List"*/-->
-    <div th:each="model: ${changeset}" class="ui card" style="width: 100%">
+    <div th:each="feedModel: ${changeset}" class="ui card" style="width: 100%">
         <div class="content" style="width: 100%">
-            <!--@thymesVar id="model" type="io.pivio.view.app.feed.FeedModel"-->
-            <a th:href="'/app/overview/'+${model.feedItem.document}" class="ui blue header" th:text="${model.short_name}"></a>
+            <!--@thymesVar id="feedModel" type="io.pivio.view.app.feed.FeedModel"-->
+            <a th:href="'/app/overview/'+${feedModel.feedItem.document}" class="ui blue header"
+               th:text="${feedModel.short_name}"></a>
             <div class="meta">
-                <span class="right floated time" th:text="${model.getPrettyDate()}"></span>
+                <span class="right floated time" th:text="${feedModel.getPrettyDate()}"></span>
             </div>
 
-            <div class="content description" th:each="field: ${model.feedItem.fields}">
-                <div>
-                    <i th:class="${field.getColoredIcon() + ' ui icon'}"></i>
-                    <span class="ui grey label" th:text="${field.path}"></span> =
-                    <span th:text="${field.value}">???</span>
+            <div class="content description" th:each="uniquePathEntry : ${feedModel.feedItem.getUniquePath()}">
+                <div th:if="${uniquePathEntry.value.size()} &lt; 6" th:each="changesList : ${uniquePathEntry.value}">
+                    <div th:each="change : ${changesList}">
+                        <span class="ui grey label" th:text="${change.path}"></span>
+                        <span th:text="${change.value}"></span>
+                    </div>
+                </div>
+
+
+                <div th:if="${uniquePathEntry.value.size()} &gt; 5">
+
+                    <div class="ui accordion">
+                        <div class="title">
+                            <i class="dropdown icon"></i>
+                            <span class="ui grey "
+                                  th:text="${uniquePathEntry.key} + ' (' + ${uniquePathEntry.value.size()}+ ')'"></span>
+                        </div>
+                        <div class="content">
+                            <div th:each="changesList : ${uniquePathEntry.value}">
+                                <div th:each="change : ${changesList}">
+                                    <span class="ui grey label" th:text="${change.path}"></span>
+                                    <span th:text="${change.value}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
         </div>
-
     </div>
-
-
 </div>
 </body>
 </html>

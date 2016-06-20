@@ -1,12 +1,8 @@
 package io.pivio.view.app.feed.serverresponse;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.joda.time.DateTime;
-import org.ocpsoft.prettytime.PrettyTime;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FeedItem {
@@ -17,6 +13,18 @@ public class FeedItem {
     public List<Field> fields = new ArrayList<>();
 
     public FeedItem() {
+    }
+
+    public Map<String, List<Field>> getUniquePath() {
+        Map<String, List<Field>> result = new HashMap<>();
+        for (Field field : fields) {
+            String uniquePath = field.path.split("/")[1];
+            if (!result.containsKey(uniquePath)) {
+                result.put(uniquePath, new ArrayList<>());
+            }
+            result.get(uniquePath).add(field);
+        }
+        return result;
     }
 
 }

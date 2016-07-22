@@ -34,55 +34,51 @@ public class ConfigReader {
                 serverConfig.pages = (List) objectMap.get("pages");
             }
 
-            serverConfig.apiAddress = getValueFromConfigMap(objectMap, "api", serverConfig.apiAddress);
-            serverConfig.jsApiAddress = getValueFromConfigMap(objectMap, "js_api", serverConfig.jsApiAddress);
-            serverConfig.mainUrl = getValueFromConfigMap(objectMap, "mainUrl", serverConfig.mainUrl);
+            serverConfig.apiAddress = getValueFromConfigMapOrEnvVariable(objectMap, "api", serverConfig.apiAddress, "PIVIO_SERVER");
+            serverConfig.jsApiAddress = getValueFromConfigMapOrEnvVariable(objectMap, "js_api", serverConfig.jsApiAddress, "PIVIO_SERVER_JS");
+            serverConfig.mainUrl = getValueFromConfigMapOrEnvVariable(objectMap, "mainurl", serverConfig.mainUrl, "PIVIO_VIEW");
 
-            String pivioServer = System.getenv("PIVIO_SERVER");
-            if (pivioServer != null) {
-                serverConfig.apiAddress = pivioServer;
-            }
-
-            String pivioServerJS = System.getenv("PIVIO_SERVER_JS");
-            if (pivioServerJS != null) {
-                serverConfig.jsApiAddress = pivioServerJS;
-            }
-
-            String mainUrl = System.getenv("PIVIO_VIEW");
-            if (pivioServerJS != null) {
-                serverConfig.mainUrl = mainUrl;
-            }
-
-            for (Object page : serverConfig.pages) {
-                if (page instanceof HashMap) {
-                    HashMap p = ((HashMap) page);
-                    if (p.containsKey("url")) {
-                        String url = (String) p.get("url");
-                        if (url.startsWith("/")) {
-                            p.put("url", serverConfig.mainUrl + p.get("url"));
-                        }
-                    }
-                }
-            }
+            addMainUrlToLocalUrls();
 
             log.info("Using config: " + serverConfig.toString());
 
         } catch (FileNotFoundException e) {
-            System.out.println("Config file: "+configFile+" not found.");
+            System.out.println("Config file: " + configFile + " not found.");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
 
-    private String getValueFromConfigMap(Map<String, Object> objectMap, String key, String defaultValue) {
-        if (objectMap.containsKey(key)) {
-            return (String) objectMap.get(key);
+    private void addMainUrlToLocalUrls() {
+        for (Object page : serverConfig.pages) {
+            if (page instanceof HashMap) {
+                HashMap p = ((HashMap) page);
+                if (p.containsKey("url")) {
+                    String url = (String) p.get("url");
+                    if (url.startsWith("/")) {
+                        p.put("url", serverConfig.mainUrl + p.get("url"));
+                    }
+                }
+            }
         }
-        return defaultValue;
+    }
+
+    private String getValueFromConfigMapOrEnvVariable(Map<String, Object> objectMap, String key, String defaultValue, String envVariable) {
+        String result = defaultValue;
+        if (objectMap.containsKey(key)) {
+            result = (String) objectMap.get(key);
+        }
+
+        String propFromEnvironment = System.getenv(envVariable);
+        if (propFromEnvironment != null) {
+            result = propFromEnvironment;
+        }
+
+        return result;
     }
 
     Map<String, Object> readYamlFile(String yamlFile) throws FileNotFoundException, UnsupportedEncodingException {
-        System.out.println("Config file: "+configFile+".");
+        System.out.println("Config file: " + configFile + ".");
         File file = new File(yamlFile);
         BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
         YamlReader yamlReader = new YamlReader(in);

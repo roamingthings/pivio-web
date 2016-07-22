@@ -14,7 +14,7 @@ public class Document {
     public String data_format_version;
     public String description;
     public String type;
-    public String vcs;
+    public String vcsroot;
     public String name;
     public String short_name;
     public String id;
@@ -38,7 +38,7 @@ public class Document {
                 ", data_format_version='" + data_format_version + '\'' +
                 ", description='" + description + '\'' +
                 ", type='" + type + '\'' +
-                ", vcs='" + vcs + '\'' +
+                ", vcsroot='" + vcsroot + '\'' +
                 ", name='" + name + '\'' +
                 ", short_name='" + short_name + '\'' +
                 ", id='" + id + '\'' +

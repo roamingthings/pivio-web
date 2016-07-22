@@ -38,9 +38,9 @@
                     <div th:text="${pivio.document.contact}" class="detail"></div>
                 </div>
 
-                <div th:if="${pivio.document.vcs}" class="ui basic label">
+                <div th:if="${pivio.document.vcsroot}" class="ui basic label">
                     <i class="file text outline icon"></i> Source
-                    <div class="detail" th:text="${pivio.document.vcs}"></div>
+                    <div class="detail" th:text="${pivio.document.vcsroot}"></div>
                 </div>
 
                 <div th:if="${pivio.document.context}">

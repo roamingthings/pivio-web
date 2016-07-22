@@ -18,7 +18,7 @@ apply plugin: 'idea'
 
 task preBuild << {
     println 'Generating version number from git.'
-    new File("build/classes/main/VERSION").withWriter { out ->
+    new File("build/resources/main/VERSION").withWriter { out ->
         out.println 'git rev-parse HEAD'.execute().text
     }
 }

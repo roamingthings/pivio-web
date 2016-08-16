@@ -33,7 +33,7 @@ public class ListController {
         try {
             overview = listService.getShortInfo();
         } catch (IOException e) {
-            model.addAttribute("pivioErrorMessage", "Document server is not reachable. Please try again later.");
+            model.addAttribute("pivioErrorMessage", "Document server is not reachable. Please try again later. ("+e.getMessage()+")");
         }
         model.addAttribute("pivioOverview", overview);
         return "overview";

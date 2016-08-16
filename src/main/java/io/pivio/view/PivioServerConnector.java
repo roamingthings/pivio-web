@@ -55,7 +55,7 @@ public class PivioServerConnector {
             sort(result);
         } catch (Exception e) {
             log.error("Pivio Server at {} does not respond (Exception=\n{}\n).", url, e.getMessage());
-            throw new IOException();
+            throw new IOException("Unable to connect to "+url+".");
         }
         return result;
     }

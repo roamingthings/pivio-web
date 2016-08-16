@@ -43,7 +43,7 @@ public class ConfigReader {
             log.info("Using config: " + serverConfig.toString());
 
         } catch (FileNotFoundException e) {
-            System.out.println("Config file: " + configFile + " not found.");
+            log.info("Config file: {} not found.", configFile);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -67,18 +67,20 @@ public class ConfigReader {
         String result = defaultValue;
         if (objectMap.containsKey(key)) {
             result = (String) objectMap.get(key);
+            log.debug("Pivio View Server Config: Reading {} = {} from config file.", key, result);
         }
 
         String propFromEnvironment = System.getenv(envVariable);
         if (propFromEnvironment != null) {
             result = propFromEnvironment;
+            log.debug("Pivio View Server Config: Reading {} = {} from environment variables.", key, propFromEnvironment);
         }
 
         return result;
     }
 
     Map<String, Object> readYamlFile(String yamlFile) throws FileNotFoundException, UnsupportedEncodingException {
-        System.out.println("Config file: " + configFile + ".");
+        log.info("Using config file: ", configFile);
         File file = new File(yamlFile);
         BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
         YamlReader yamlReader = new YamlReader(in);
@@ -86,7 +88,7 @@ public class ConfigReader {
         try {
             object = yamlReader.read();
         } catch (YamlException e) {
-            System.out.println("Error: Yamlfile " + yamlFile);
+            log.error("Error reading  yaml file {}.", yamlFile);
             e.printStackTrace();
         }
 

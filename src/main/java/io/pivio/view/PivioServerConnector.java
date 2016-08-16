@@ -1,10 +1,10 @@
 package io.pivio.view;
 
 import io.pivio.view.app.feed.serverresponse.FeedItem;
+import io.pivio.view.app.overview.detail.ServiceIdShortName;
 import io.pivio.view.app.overview.detail.serverresponse.Document;
 import io.pivio.view.app.overview.list.serverresponse.Overview;
 import io.pivio.view.configuration.ServerConfig;
-import io.pivio.view.app.overview.detail.ServiceIdShortName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +54,7 @@ public class PivioServerConnector {
             result = response.getBody();
             sort(result);
         } catch (Exception e) {
+            log.error("Pivio Server at {} does not respond (Exception=\n{}\n).", url, e.getMessage());
             throw new IOException();
         }
         return result;
@@ -74,7 +75,7 @@ public class PivioServerConnector {
     }
 
     public List<ServiceIdShortName> getAllServices() {
-        String url =  serverConfig.apiAddress + "/document?fields=service,id,short_name";
+        String url = serverConfig.apiAddress + "/document?fields=service,id,short_name";
         RestTemplate restTemplate = new RestTemplate();
         ParameterizedTypeReference<List<ServiceIdShortName>> typeRef = new ParameterizedTypeReference<List<ServiceIdShortName>>() {
         };

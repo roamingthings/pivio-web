@@ -28,25 +28,27 @@ public class ConfigReader {
 
     @PostConstruct
     void readArguments() {
+        Map<String, Object> objectMap = new HashMap<>();
         try {
-            Map<String, Object> objectMap = readYamlFile(configFile);
-            if (objectMap.containsKey("pages")) {
-                serverConfig.pages = (List) objectMap.get("pages");
-            }
-
-            serverConfig.apiAddress = getValueFromConfigMapOrEnvVariable(objectMap, "api", serverConfig.apiAddress, "PIVIO_SERVER");
-            serverConfig.jsApiAddress = getValueFromConfigMapOrEnvVariable(objectMap, "js_api", serverConfig.jsApiAddress, "PIVIO_SERVER_JS");
-            serverConfig.mainUrl = getValueFromConfigMapOrEnvVariable(objectMap, "mainurl", serverConfig.mainUrl, "PIVIO_VIEW");
-
-            addMainUrlToLocalUrls();
-
-            log.info("Using config: " + serverConfig.toString());
-
+            objectMap = readYamlFile(configFile);
         } catch (FileNotFoundException e) {
             log.info("Config file: {} not found.", configFile);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
+        if (objectMap.containsKey("pages")) {
+            serverConfig.pages = (List) objectMap.get("pages");
+        }
+
+        serverConfig.apiAddress = getValueFromConfigMapOrEnvVariable(objectMap, "api", serverConfig.apiAddress, "PIVIO_SERVER");
+        serverConfig.jsApiAddress = getValueFromConfigMapOrEnvVariable(objectMap, "js_api", serverConfig.jsApiAddress, "PIVIO_SERVER_JS");
+        serverConfig.mainUrl = getValueFromConfigMapOrEnvVariable(objectMap, "mainurl", serverConfig.mainUrl, "PIVIO_VIEW");
+
+        addMainUrlToLocalUrls();
+
+        log.info("Using config: " + serverConfig.toString());
+
     }
 
     private void addMainUrlToLocalUrls() {

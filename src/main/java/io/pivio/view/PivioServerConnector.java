@@ -43,7 +43,7 @@ public class PivioServerConnector {
     }
 
     public List<Overview> getOverviews() throws IOException {
-        String path = "/document?fields=short_name,id,description,name,owner,context,lastUpdate,lastUpload&sort=lastUpdate:desc";
+        String path = "/document?fields=short_name,id,description,name,owner,context,lastUpdate,lastUpload&sort=name:asc";
         String url = serverConfig.apiAddress + path;
         RestTemplate restTemplate = new RestTemplate();
         ParameterizedTypeReference<List<Overview>> typeRef = new ParameterizedTypeReference<List<Overview>>() {

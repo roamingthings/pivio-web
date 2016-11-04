@@ -55,7 +55,7 @@ public class PivioServerConnector {
             sort(result);
         } catch (Exception e) {
             log.error("Pivio Server at {} does not respond (Exception=\n{}\n).", url, e.getMessage());
-            throw new IOException("Unable to connect to "+url+".");
+            throw new IOException("Unable to connect to " + url + ".");
         }
         return result;
     }
@@ -79,6 +79,7 @@ public class PivioServerConnector {
         RestTemplate restTemplate = new RestTemplate();
         ParameterizedTypeReference<List<ServiceIdShortName>> typeRef = new ParameterizedTypeReference<List<ServiceIdShortName>>() {
         };
+        log.debug("Query {}.", url);
         ResponseEntity<List<ServiceIdShortName>> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>("", getHeaders()), typeRef);
         return response.getBody();
     }

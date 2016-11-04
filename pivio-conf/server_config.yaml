@@ -1,6 +1,6 @@
 api: http://localhost:9123/
 js_api: http://localhost:9123/
-mainUrl: http://localhost:8080/
+mainurl: http://localhost:8080/
 pages:
   - description: Overview
     url: /app/overview

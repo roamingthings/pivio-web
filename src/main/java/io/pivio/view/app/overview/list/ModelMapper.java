@@ -16,6 +16,7 @@ public class ModelMapper {
         overviewModel.lastUpload = overview.lastUpload;
         overviewModel.id = overview.id;
         overviewModel.owner = overview.owner;
+        overviewModel.type = overview.type;
         return overviewModel;
     }
 }

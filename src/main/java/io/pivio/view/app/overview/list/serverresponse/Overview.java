@@ -14,6 +14,7 @@ public class Overview implements Comparable {
     public Context context;
     public String id;
     public String owner;
+    public String type;
 
     @Override
     public int compareTo(Object o) {

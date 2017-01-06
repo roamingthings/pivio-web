@@ -13,6 +13,7 @@ public class OverviewModel {
     public Context context;
     public String id;
     public String owner;
+    public String type;
 
     public String getPrettyUploadDate() {
         return new PrettyTime().format(new DateTime(lastUpload).toDate());
@@ -28,5 +29,12 @@ public class OverviewModel {
             meta = meta + " " + context.belongs_to_bounded_context;
         }
         return meta.toLowerCase();
+    }
+
+    public String getCardColor() {
+        if (type.equalsIgnoreCase("service")) {
+            return "blue";
+        }
+        return "green";
     }
 }

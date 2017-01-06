@@ -55,4 +55,13 @@ public class Document {
                 ", context=" + context +
                 '}';
     }
+
+    public boolean isService() {
+        return type.equalsIgnoreCase("service");
+    }
+
+    public boolean isLibrary() {
+        return type.equalsIgnoreCase("library");
+    }
+
 }

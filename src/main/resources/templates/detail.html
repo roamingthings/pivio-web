@@ -21,11 +21,16 @@
 
                 <p th:text="${pivio.document.description}"></p>
 
-                <div class="ui  basic label">
+                <div class="ui basic label">
                     <i class="users icon"></i> Owner
                     <a th:href="'/app/overview/list?field=owner&amp;value='+${pivio.document.owner}"
                        th:text="${pivio.document.owner}"
                        class="detail"></a>
+                </div>
+
+
+                <div class="ui basic label">
+                    Type <div class="detail" th:text="${pivio.document.type}"></div>
                 </div>
 
                 <div th:if="${pivio.document.status}" class="ui basic label">
@@ -57,6 +62,14 @@
                                 th:href="'/app/overview/list?field=context.visibility&amp;value='+${pivio.document.context.visibility}"
                                 th:text="${pivio.document.context.visibility}"></a></div>
                     </div>
+
+                    <div class="ui basic label">
+                        <i class="circle thin icon"></i> Json
+                        <div class="detail"><a
+                                th:href="'piviodb-'+${pivio.document.id}"
+                                th:text="Link"></a></div>
+                    </div>
+
                 </div>
 
 
@@ -87,7 +100,7 @@
 
             <!--RUNTIME ===-->
 
-            <div th:if="${pivio.document.runtime}" class="ui segment">
+            <div th:if="${pivio.document.isService()}" class="ui segment">
                 <div class="ui blue top attached label">Runtime</div>
 
                 <div class="ui basic label"> RAM
@@ -118,7 +131,7 @@
 
             <!--SERVICES ===-->
 
-            <div th:if="${pivio.document.service}" class="ui segment">
+            <div th:if="${pivio.document.isService()}" class="ui segment">
                 <div class="ui orange top attached label">Service</div>
 
                 <p/>

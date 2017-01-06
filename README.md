@@ -9,8 +9,6 @@ You can include 'external' websites and if you need to access the config of this
 
 It could very well be just a bunch of html and javascript. All the queries are done in Javascript. Templating inside JS is done with handlebars. Sounds a bit crazy but of you want to contribute ... you are very welcome ;-).
 
-# ALPHA - ALPHA - ALPHA
-
 ```
 gradle build
 ```

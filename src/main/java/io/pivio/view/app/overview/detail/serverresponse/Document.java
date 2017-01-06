@@ -56,12 +56,8 @@ public class Document {
                 '}';
     }
 
-    public boolean isService() {
+    public boolean ofTypeService() {
         return type.equalsIgnoreCase("service");
-    }
-
-    public boolean isLibrary() {
-        return type.equalsIgnoreCase("library");
     }
 
 }

@@ -100,7 +100,7 @@
 
             <!--RUNTIME ===-->
 
-            <div th:if="${pivio.document.isService()}" class="ui segment">
+            <div th:if="${pivio.document.ofTypeService()}" class="ui segment">
                 <div class="ui blue top attached label">Runtime</div>
 
                 <div class="ui basic label"> RAM
@@ -131,7 +131,9 @@
 
             <!--SERVICES ===-->
 
-            <div th:if="${pivio.document.isService()}" class="ui segment">
+            <div th:if="${pivio.document.ofTypeService()}" class="ui segment">
+
+
                 <div class="ui orange top attached label">Service</div>
 
                 <p/>

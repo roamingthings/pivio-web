@@ -16,7 +16,6 @@ public class DocumentViewModel {
     public Document document;
     public ServiceViewModel service = new ServiceViewModel();
     public List<SoftwareDependency> softwareDependencies = new ArrayList<>();
-    public String pivioDBUrl = "";
 
     public DocumentViewModel(Document document) {
         this.document = document;

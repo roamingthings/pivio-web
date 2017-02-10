@@ -65,16 +65,19 @@
                     </div>
                 </div>
 
-                <div th:if="${pivio.document.product_context}" class="ui basic label">
+                <div th:if="${pivio.document.project_context}" class="ui basic label">
                     <i class="circle thin icon"></i> Product
-                    <div class="detail" th:text="${pivio.document.product_context}"></div>
+                    <div class="detail"><a
+                            th:href="'/app/overview/list?field=project_context&amp;value='+${pivio.document.project_context}"
+                            th:text="${pivio.document.project_context}">
+                    </a></div>
                 </div>
 
 
                 <div class="ui basic label">
                     <i class="file thin icon"></i> Json
                     <div class="detail"><a
-                            th:href="'piviodb-'+${pivio.document.id}"
+                            th:href="${config.jsApiAddress}+'/document/'+${pivio.document.id}"
                             th:text="Link"></a></div>
                 </div>
 

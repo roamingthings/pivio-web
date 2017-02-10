@@ -23,6 +23,7 @@ public class Document {
     public String lastUpload;
     public String lastUpdate;
     public String status;
+    public String product_context;
     public List<String> tags = new ArrayList<>();
     public Map<String, String> links = new HashMap<>();
 
@@ -47,6 +48,7 @@ public class Document {
                 ", lastUpload='" + lastUpload + '\'' +
                 ", lastUpdate='" + lastUpdate + '\'' +
                 ", status='" + status + '\'' +
+                ", product_context='" + product_context + '\'' +
                 ", tags=" + tags +
                 ", links=" + links +
                 ", runtime=" + runtime +

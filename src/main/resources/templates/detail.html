@@ -30,7 +30,8 @@
 
 
                 <div class="ui basic label">
-                    Type <div class="detail" th:text="${pivio.document.type}"></div>
+                    Type
+                    <div class="detail" th:text="${pivio.document.type}"></div>
                 </div>
 
                 <div th:if="${pivio.document.status}" class="ui basic label">
@@ -57,19 +58,24 @@
                     </div>
 
                     <div th:if="${pivio.document.context.visibility}" class="ui basic label">
-                        <i class="circle thin icon"></i> Intended usage:
+                        <i class="privacy thin icon"></i> Intended usage:
                         <div class="detail"><a
                                 th:href="'/app/overview/list?field=context.visibility&amp;value='+${pivio.document.context.visibility}"
                                 th:text="${pivio.document.context.visibility}"></a></div>
                     </div>
+                </div>
 
-                    <div class="ui basic label">
-                        <i class="circle thin icon"></i> Json
-                        <div class="detail"><a
-                                th:href="'piviodb-'+${pivio.document.id}"
-                                th:text="Link"></a></div>
-                    </div>
+                <div th:if="${pivio.document.product_context}" class="ui basic label">
+                    <i class="circle thin icon"></i> Product
+                    <div class="detail" th:text="${pivio.document.product_context}"></div>
+                </div>
 
+
+                <div class="ui basic label">
+                    <i class="file thin icon"></i> Json
+                    <div class="detail"><a
+                            th:href="'piviodb-'+${pivio.document.id}"
+                            th:text="Link"></a></div>
                 </div>
 
 
@@ -213,21 +219,21 @@
                     <li>
                         <span th:text="${dep.name +' : '+ dep.version+' '}"></span>
                         <!--<a th:href="'/app/overview/list?field=software_dependencies.name&amp;value='+${dep.name}"-->
-                           <!--th:text="${dep.name +' : '+ dep.version+' '}"></a>-->
+                        <!--th:text="${dep.name +' : '+ dep.version+' '}"></a>-->
                     </li>
                 </ul>
 
                 <p/>
 
                 <div class="ui ribbon left basic label">Licenses</div>
-            <ul class="ui list" th:each="license : ${pivio.consolidatedLicenses}">
-                <li>
-                    <span th:text="${license}"></span>
-                    <!--<a th:href="'/app/overview/list?field=software_dependencies.licenses.name&amp;value='+${license}"-->
-                       <!--th:text="${license}"></a>-->
-                </li>
+                <ul class="ui list" th:each="license : ${pivio.consolidatedLicenses}">
+                    <li>
+                        <span th:text="${license}"></span>
+                        <!--<a th:href="'/app/overview/list?field=software_dependencies.licenses.name&amp;value='+${license}"-->
+                        <!--th:text="${license}"></a>-->
+                    </li>
 
-            </ul>
+                </ul>
 
 
             </div>

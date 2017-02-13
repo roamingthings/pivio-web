@@ -65,11 +65,11 @@
                     </div>
                 </div>
 
-                <div th:if="${pivio.document.project_context}" class="ui basic label">
+                <div th:if="${pivio.document.product_context}" class="ui basic label">
                     <i class="circle thin icon"></i> Product
                     <div class="detail"><a
-                            th:href="'/app/overview/list?field=project_context&amp;value='+${pivio.document.project_context}"
-                            th:text="${pivio.document.project_context}">
+                            th:href="'/app/overview/list?field=product_context&amp;value='+${pivio.document.product_context}"
+                            th:text="${pivio.document.product_context}">
                     </a></div>
                 </div>
 

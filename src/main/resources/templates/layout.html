@@ -20,14 +20,14 @@
 
 <div class="ui container">
     <div id="main_menu" class="ui pointing   menu">
-        <div class="item">
+        <a href="/" class="item">
             <div class="ui animated  button" tabindex="0">
                 <div class="visible content">pivio</div>
                 <div class="hidden content">
                     <i class="heart icon"></i>
                 </div>
             </div>
-        </div>
+        </a>
 
         <a class="blue item " th:each="page: ${config.pages}" th:id="${page.id}" th:href="${page.url}"
            th:text="${page.description}">&nbsp;</a>

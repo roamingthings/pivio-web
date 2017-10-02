@@ -37,7 +37,7 @@ public class DocumentViewModel {
         List<String> result = new ArrayList<>();
         for (SoftwareDependency software_dependency : softwareDependencies) {
             for (License license : software_dependency.licenses) {
-                String licenseName = license.name;
+                String licenseName = license.fullName;
                 if (licenseName == null) {
                     licenseName = UNKNOWN_LICENSE;
                 }

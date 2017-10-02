@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class License {
-    public String name;
+    public String fullName;
     public String url;
 
-    public License(String name, String url) {
-        this.name = name;
+    public License(String fullName, String url) {
+        this.fullName = fullName;
         this.url = url;
     }
 

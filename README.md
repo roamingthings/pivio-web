@@ -39,3 +39,7 @@ pages:
 java -jar build/libs/view-0.0.1-SNAPSHOT.jar -f service_config.yaml
 ```
 
+# Build Status
+
+[![Build Status](https://travis-ci.org/pivio/pivio-web.svg?branch=master)](https://travis-ci.org/pivio/pivio-web)
+
